@@ -29,13 +29,13 @@ class HandlerController extends Controller
 
             $request->session()->regenerate();
             Auth::loginUsingId($user->id);
-            return redirect('/kano')->with('message', 'Welcome Back');
+            return redirect('/dashboard')->with('message', 'Welcome Back');
         } else {
             return redirect('/')->with('error', 'invalid detials');
         }
     }
 
-    public function kanoindex(Request $request)
+    public function dashboardindex(Request $request)
     {
         if ($request->method() == "GET") {
 
@@ -43,7 +43,7 @@ class HandlerController extends Controller
 
             $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->get();
             // dd($outputTable);
-            return view("kano.index", [
+            return view("dashboard.index", [
                 'outputTable' => $outputTableinfo
             ]);
         }
@@ -80,7 +80,7 @@ class HandlerController extends Controller
             ->get();
 
             // dd($editinfo);
-            return view("kano.edit_indicator", [
+            return view("dashboard.edit_indicator", [
                 'editinfo' => $editinfo,
                 'deliverableinfo' => $deliverableinfo,
                 'editinfodistinct' => $editinfodistinct,

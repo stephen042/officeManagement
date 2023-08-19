@@ -3,18 +3,18 @@
 
 <head>
 
-    @include('kano.includes.head')
+    @include('dashboard.includes.head')
 
 </head>
 
 <body>
 
     <!-- ======= Header ======= -->
-    @include('kano.includes.header')
+    @include('dashboard.includes.header')
     <!-- End Header -->
 
     <!-- ======= Sidebar ======= -->
-    @include('kano.includes.sidebar');
+    @include('dashboard.includes.sidebar');
     <!-- End Sidebar-->
 
     <main id="main" class="main">
@@ -111,10 +111,10 @@
     <!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    @include('kano.includes.footer')
+    @include('dashboard.includes.footer')
     <!-- End Footer -->
 
-    @include('kano.includes.script')
+    @include('dashboard.includes.script')
 
 </body>
 
