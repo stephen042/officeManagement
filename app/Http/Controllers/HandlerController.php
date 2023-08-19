@@ -17,7 +17,7 @@ class HandlerController extends Controller
     public function index(Request $request)
     {
         if ($request->method() == "GET") {
-            return view("welcome");
+            return view("index");
         }
 
 
@@ -52,7 +52,7 @@ class HandlerController extends Controller
     public function home(Request $request)
     {
         if ($request->method() == "GET") {
-            return view("welcome");
+            return view("index");
         }
     }
 
