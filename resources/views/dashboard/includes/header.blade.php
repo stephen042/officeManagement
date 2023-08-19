@@ -3,7 +3,7 @@
     <div class="d-flex align-items-center justify-content-between">
       <span class="logo d-flex align-items-center">
         <img src="{{ URL('assets/home/fav.png') }}" alt="">
-        <span class="d-none d-lg-block">Jose's Management </span>
+        <span class="d-none d-lg-block">Plane Nigerian</span>
       </span>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div><!-- End Logo -->
