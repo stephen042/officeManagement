@@ -29,7 +29,11 @@ class HandlerController extends Controller
 
             $request->session()->regenerate();
             Auth::loginUsingId($user->id);
-            return redirect('/dashboard')->with('message', 'Welcome Back');
+            if ($user->role == 0) {
+                return redirect('/dashboard')->with('message', 'Welcome Back');
+            }elseif($user->role == 1){
+                return redirect('/admin')->with('message', 'Welcome Back Admin');
+            }
         } else {
             return redirect('/')->with('error', 'invalid detials');
         }
@@ -39,7 +43,7 @@ class HandlerController extends Controller
     {
         if ($request->method() == "GET") {
 
-            $stateid = Auth::user()->stateid;
+            $stateid = Auth::user()->id;
 
             $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->get();
             // dd($outputTable);
@@ -97,7 +101,7 @@ class HandlerController extends Controller
         $request->validate([
             "year" => "required",
             "quarter" => "required",
-            "deliverable" => "required",
+            // "deliverable" => "required",
             "acheived" => "required"
         ]);
 

@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-<title>Data - Plane Nigerian Management</title>
+<title>Data - PLANE Nigeria Management</title>
 <meta content="" name="description">
 <meta content="" name="keywords">
 
