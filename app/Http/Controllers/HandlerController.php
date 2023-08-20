@@ -139,7 +139,7 @@ class HandlerController extends Controller
 
         // to collect the current output datas
         $outputinfo = outputTable::where("id", "=", "{$data->idpdf}")->get()->first();
-        $user = user::where("stateid","=","$outputinfo->stateid")->get()->first();
+        $user = user::where("id","=","$outputinfo->stateid")->get()->first();
 
         $editinfo = deliverableTbale::where("outputid", "=", "{$data->idpdf}")
             ->where("stateid", "=", "{$outputinfo->stateid}")
