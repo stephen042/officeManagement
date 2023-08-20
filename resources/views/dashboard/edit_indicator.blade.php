@@ -107,7 +107,7 @@
                                                 <option value="{{ $list->deliverable }}">{{ $list->deliverable }}
                                                 </option>
                                             @empty
-                                                <option selected value="No deliverable">No deliverable </option>
+                                                <option value="No deliverable">No deliverable </option>
                                             @endforelse
 
                                         </select>
