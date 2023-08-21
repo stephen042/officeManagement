@@ -45,7 +45,7 @@ class HandlerController extends Controller
 
             $stateid = Auth::user()->id;
 
-            $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->get();
+            $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->orderBy('id','DESC')->get();
             // dd($outputTable);
             return view("dashboard.index", [
                 'outputTable' => $outputTableinfo
@@ -69,6 +69,7 @@ class HandlerController extends Controller
             // to get the table data of acheived data
             $editinfo = deliverableTbale::where("outputid", "=", "{$id}")
             ->where("stateid", "=", "{$outputinfo->stateid}")
+            ->orderBy('id','DESC')
             ->get();
 
             // for getting year distinct 
@@ -97,6 +98,8 @@ class HandlerController extends Controller
         // to collect the current output datas
         $outputinfo = outputTable::where("id", "=", "{$id}")->get()->first();
 
+        // to get state
+        $state  = User::where("id","=","$outputinfo->stateid")->get()->first(); 
         // to validate the data
         $request->validate([
             "year" => "required",
@@ -114,6 +117,7 @@ class HandlerController extends Controller
             "acheived" => "$data->acheived",
             "outputid" => "$id",
             "stateid" => "$outputinfo->stateid",
+            "state" => "$state->state",
             "status" => "1",
         ]);
 

@@ -28,7 +28,7 @@
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
-            <button class="btn btn-primary" onclick="history.go(-1)"> Back</button>
+            <button class="btn btn-primary" onclick="window.location.href='{{ route('dashboard') }}'"> Back</button>
         </div>
         <div class="alert alert-info alert-dismissible fade show" role="alert">
 

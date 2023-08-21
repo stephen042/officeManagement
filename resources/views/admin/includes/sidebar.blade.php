@@ -3,16 +3,36 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('dashboard') }}">
+        <a class="nav-link collapsed" href="{{ route('admin') }}">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="{{ route('create') }}">
+        <a class="nav-link collapsed" href="">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Create New State</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="">
+          <i class="bi bi-journal-text"></i>
+          <span>Create New Indicator</span>
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="">
+          <i class="bi bi-layout-text-window-reverse"></i>
+          <span>Deliverable Requests</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="">
           <i class="bi bi-person"></i>
-          <span>Create New Record</span>
+          <span>Profile settings</span>
         </a>
       </li>
       <hr>

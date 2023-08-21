@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HandlerController;
 
@@ -27,3 +28,8 @@ Route::post('dashboard/edit_indicator/{id}',[HandlerController::class, "edit_ind
 Route::get('/invoice',[HandlerController::class, "invoice"])->middleware('auth')->name('invoice');
 Route::post('/invoice',[HandlerController::class, "invoice"])->middleware('auth')->name('pdf');
 Route::post('/dashboard',[HandlerController::class, "logout"])->name('logout');
+
+
+
+// Admin Routing System
+Route::get('/admin',[AdminController::class, "index"])->middleware('auth')->name('admin');
