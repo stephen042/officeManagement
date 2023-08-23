@@ -18,7 +18,7 @@
     <!-- End Sidebar-->
 
     <main id="main" class="main">
-        <button onclick="window.location.href='{{ route('admin') }}'" class="btn btn-primary my-2">back</button>
+        <button onclick="window.history.back()" class="btn btn-primary my-2">back</button>
 
         {{-- <form action="" style="display: inline; float:right;">
       <button class="btn btn-danger my-2">delete</button>
