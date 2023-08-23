@@ -72,21 +72,21 @@
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Year</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputEmail" 
-                                placeholder="State Name" value="{{ $deliverableTbale->Year }}" disabled>
+                                placeholder="State Name" value="{{ $deliverableTbale->Year }}" name="Year">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Quarter</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputEmail" 
-                                placeholder="State Name" value="{{ $deliverableTbale->quarter }}" disabled>
+                                placeholder="State Name" value="{{ $deliverableTbale->quarter }}" name="quarter">
                         </div>
                     </div>
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Deliverable</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputEmail" 
-                                placeholder="State Name" value="{{ $deliverableTbale->Deliverable }}" disabled>
+                                placeholder="State Name" value="{{ $deliverableTbale->Deliverable }}" name="Deliverable">
                         </div>
                     </div>
                     <div class="row mb-3">
