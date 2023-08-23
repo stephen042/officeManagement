@@ -105,8 +105,8 @@
             </div>
         </div>
         <hr>
-        <div class="card">
-            <div class="card-body" style="overflow:auto;">
+        <div class="card" style="overflow:auto;">
+            <div class="card-body" >
                 <h5 class="card-title" >All Deliverables</h5>
                 @if (session()->has('message'))
                     <div class="alert alert-success alert-dismissible fade show" role="alert">
