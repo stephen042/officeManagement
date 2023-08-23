@@ -8,4 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class deliverable_table extends Model
 {
     use HasFactory;
+    
+    public $guarded = [];
 }

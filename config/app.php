@@ -15,7 +15,7 @@ return [
 
     'name' => env('APP_NAME', 'Laravel'),
 
-    "state" => [1 => "kano",2 => "jigawa", 3 => "kaduna"],
+    "status" => [1 => "Pending",2 => "Approved"],
 
     /*
     |--------------------------------------------------------------------------

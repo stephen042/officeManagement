@@ -10,21 +10,21 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('create_state') }}">
           <i class="bi bi-menu-button-wide"></i>
           <span>Create New State</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('create_indicator') }}">
           <i class="bi bi-journal-text"></i>
           <span>Create New Indicator</span>
         </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="">
+        <a class="nav-link collapsed" href="{{ route('deliverable_approve') }}">
           <i class="bi bi-layout-text-window-reverse"></i>
           <span>Deliverable Requests</span>
         </a>

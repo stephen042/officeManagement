@@ -10,4 +10,5 @@ class outputTable extends Model
     use HasFactory;
 
     public $table = 'output_tables';
+    public $guarded = [];
 }
