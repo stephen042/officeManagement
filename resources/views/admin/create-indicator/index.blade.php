@@ -113,7 +113,7 @@
         <hr>
         <div class="card">
             <div class="card-body" style="overflow:auto;">
-                <h5 class="card-title">Output & Indicator</h5>
+                <h5 class="card-title">List Of Indicator</h5>
                 <!-- Table with stripped rows -->
                 <table class="table datatable">
                     <thead>
