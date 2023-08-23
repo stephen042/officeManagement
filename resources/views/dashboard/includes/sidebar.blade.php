@@ -5,7 +5,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('dashboard') }}">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Indicators</span>
         </a>
       </li>
 

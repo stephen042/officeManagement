@@ -26,7 +26,7 @@
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('deliverable_approve') }}">
           <i class="bi bi-layout-text-window-reverse"></i>
-          <span>Deliverable Requests</span>
+          <span>Pending Requests</span>
         </a>
       </li>
       <li class="nav-item">
