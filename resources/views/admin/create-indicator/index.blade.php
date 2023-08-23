@@ -112,8 +112,8 @@
         </div>
         <hr>
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">All States</h5>
+            <div class="card-body" style="overflow:auto;">
+                {{-- <h5 class="card-title">All out</h5> --}}
                 <!-- Table with stripped rows -->
                 <table class="table datatable">
                     <thead>

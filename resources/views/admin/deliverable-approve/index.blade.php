@@ -20,7 +20,7 @@
     <main id="main" class="main">
         <button onclick="window.location.href='{{ route('create_indicator') }}'"
             class="btn btn-primary my-2">back</button>
-        <div class="card">
+        <div class="card" style="overflow:auto;">
             <div class="card-body">
                 <h5 class="card-title">All Deliverables for Approval</h5>
                 @if (session()->has('message'))
