@@ -167,7 +167,7 @@ class HandlerController extends Controller
             'editinfo' => $editinfo,
             'sum_achieved' => $sum_of_achieved,
         ]);
-        return $pdf->stream($user->state.'_report'.$date.'.pdf');
+        return $pdf->download($user->state.'_report'.$date.'.pdf');
     }
 
 
