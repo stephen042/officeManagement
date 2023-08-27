@@ -47,7 +47,7 @@
     <body>
 
         <div style="text-align: center">
-            <img height="100" width="100" src="../public/assets/home/fav.png">
+            <img height="100" width="100" src="../public/assets/home/logo2.jpg">
         </div>
         <hr>
         <div style="color: rgb(70, 70, 70)">
@@ -81,9 +81,6 @@
                     </td>
                     <td>{{ date('d M, Y / h:i a', strtotime($data->created_at)) }}</td>
                 </tr>
-                @php
-                    $sum_of_achieved += $data->acheived;
-                @endphp
             @empty
                 <tr>
 
@@ -100,7 +97,7 @@
         <hr>
         <div style="color: rgb(59, 59, 59)">
             <h3> Target : {{ $outputinfo->target }}</h3>
-            <h3> Total Achieved : {{ $sum_of_achieved }} </h3>
+            <h3> Total Achieved : {{ $sum_achieved }} </h3>
         </div>
     </body>
 

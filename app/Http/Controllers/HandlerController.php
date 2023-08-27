@@ -151,15 +151,23 @@ class HandlerController extends Controller
             ->where("quarter", "=", "{$data->quarterpdf}")
             ->get();
 
-            $sum_of_achieved = 0;
+            $sum_of_achieved = deliverableTbale::where("outputid", "=", "{$data->idpdf}")
+            ->where("stateid", "=", "{$outputinfo->stateid}")
+            ->where("Year", "=", "{$data->yearpdf}")
+            ->where("quarter", "=", "{$data->quarterpdf}")
+            ->where("status","=","2")
+            ->sum('acheived');
+             
+            // dd($sum_of_achieved);
+            // $sum_of_achieved = $sum_of_achieved_get->sum('acheived');
             $date = Carbon::now()->format('Y-m-d-H-i-a');
 
         $pdf = Pdf::loadView('invoice', [
             'outputinfo' => $outputinfo,
             'editinfo' => $editinfo,
-            'sum_of_achieved' => $sum_of_achieved,
+            'sum_achieved' => $sum_of_achieved,
         ]);
-        return $pdf->download($user->state.'_report'.$date.'.pdf');
+        return $pdf->stream($user->state.'_report'.$date.'.pdf');
     }
 
 
