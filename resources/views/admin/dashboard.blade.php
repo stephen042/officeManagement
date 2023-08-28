@@ -41,7 +41,7 @@
                         @foreach ($stateinfo as $info => $data)
                           <div class="col-xxl-4 col-md-4">
                               <div class="card info-card sales-card">
-                                <a href="#">
+                                <a href="{{ route('states',[$data->id]) }}">
                                   <div class="card-body">
                                       <h5 class="card-title">State <span>| DATA</span></h5>
 
@@ -52,7 +52,7 @@
                                           </div>
                                           <div class="ps-3">
                                               <h6>{{ $data->state }} </h6>
-                                              <span class="text-success small pt-1 fw-bold">Click to see State DETAILS</span> <span
+                                              <span class="text-success small pt-1 fw-bold">ACTIVE</span> <span
                                                   class="text-muted small pt-2 ps-1"></span>
 
                                           </div>
@@ -80,9 +80,9 @@
                                             <th scope="col">indicator</th>
                                             <th scope="col">Target</th>
                                             {{-- <th scope="col">Deliverables</th> --}}
-                                            <th scope="col">Action</th>
-                                            {{-- <th scope="col">Delete</th> --}}
-                                            {{-- <th scope="col">Start Date</th> --}}
+                                            <!-- <th scope="col">Action</th> -->
+                                            <!-- {{-- <th scope="col">Delete</th> --}} -->
+                                            <!-- {{-- <th scope="col">Start Date</th> --}} -->
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -97,17 +97,6 @@
                                                     {{ $data->indicator }}
                                                 </td>
                                                 <td>{{ $data->target }}</td>
-
-                                                <td class="d-flex justify-content-around">
-                                                  <div class="d-flex">
-                                                    <a href="" class="btn btn-info btn-sm mx-2"> Edit</a>
-                                                    <form action="" method="">
-                                                        {{-- @method('DELETE') --}}
-                                                        @csrf
-                                                        <input class="btn btn-danger" type="submit" value="delete" />
-                                                    </form>
-                                                </div>
-                                                </td>
                                             </tr>
                                         @empty
                                         <tr>

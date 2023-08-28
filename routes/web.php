@@ -58,3 +58,5 @@ Route::delete('/admin/create-indicator/create-deliverable/{deliverable_table}',[
 Route::get('/admin/deliverable',[AdminController::class,"deliverable_approve"])->middleware('auth')->name('deliverable_approve');
 Route::get('/admin/deliverable/edit/{deliverableTbale}',[AdminController::class,"deliverable_approve_edit"])->middleware('auth')->name('deliverable_approve_edit');
 Route::post('/admin/deliverable/edit/{deliverableTbale}',[AdminController::class,"deliverable_approve_edit"])->middleware('auth')->name('deliverable_approve_edit_post');
+
+Route::get('/admin/states/{user}',[AdminController::class, 'stateinfo'])->middleware('auth')->name('states');

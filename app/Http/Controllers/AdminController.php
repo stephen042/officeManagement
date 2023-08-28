@@ -243,4 +243,22 @@ class AdminController extends Controller
         }
     }
 
+    // for viewing single states 
+    public function stateinfo(Request $request, User $user) {
+        if ($request->method() == "GET") {
+
+            $userinfo = User::where("id","$user->id")
+            ->where("role","=","0")
+            ->get()
+            ->first();
+
+            $outputinfo = outputTable::where("stateid","=","$user->id")->get();
+
+            return view('admin.states.index',[
+                "userinfo" => $userinfo,
+                "outputinfo" => $outputinfo,
+            ]);
+        }
+    }
+
 }
