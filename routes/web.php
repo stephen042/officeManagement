@@ -60,3 +60,4 @@ Route::get('/admin/deliverable/edit/{deliverableTbale}',[AdminController::class,
 Route::post('/admin/deliverable/edit/{deliverableTbale}',[AdminController::class,"deliverable_approve_edit"])->middleware('auth')->name('deliverable_approve_edit_post');
 
 Route::get('/admin/states/{user}',[AdminController::class, 'stateinfo'])->middleware('auth')->name('states');
+Route::get('/admin/states/{user}/{outputTable}',[AdminController::class, 'statesDetails'])->middleware('auth')->name('statesDetails');

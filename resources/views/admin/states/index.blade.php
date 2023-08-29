@@ -52,7 +52,7 @@
                                 {{ date('Y M/D H:i a') }}
                             </td>
                             <td>
-                                <a href="" class="btn btn-info btn-sm mx-2"> View</a>
+                                <a href="{{ route('statesDetails',[$userinfo->id,$data->id])}}" class="btn btn-info btn-sm mx-2"> View</a>
                             </td>
                         </tr>
                         @empty

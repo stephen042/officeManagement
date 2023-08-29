@@ -11,19 +11,20 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
 
         if ($request->method() == "GET") {
             // to get state info
-            $stateinfo = User::where('role',"=","0")->get();
+            $stateinfo = User::where('role', "=", "0")->get();
 
             // TO get output info
-            $tabledata = outputTable::orderBy('id','DESC')->get();
+            $tabledata = outputTable::orderBy('id', 'DESC')->get();
 
             // To get deliverables
             $Dinfo = deliverable_table::get();
 
-            return view('admin.dashboard',[
+            return view('admin.dashboard', [
                 "stateinfo" => $stateinfo,
                 "tabledata" => $tabledata,
                 "Dinfo" => $Dinfo,
@@ -31,20 +32,21 @@ class AdminController extends Controller
         }
     }
 
-    public function state(Request $request){
+    public function state(Request $request)
+    {
         if ($request->method() == "GET") {
 
-            $stateinfo = User::where('role',"=","0")
-            ->orderBy('id','DESC')
-            ->get();
+            $stateinfo = User::where('role', "=", "0")
+                ->orderBy('id', 'DESC')
+                ->get();
 
-            return view('admin/create-state.index',[
+            return view('admin/create-state.index', [
                 "stateinfo" => $stateinfo,
             ]);
         }
 
         $request->validate([
-            "state" => ["required","unique:users"],
+            "state" => ["required", "unique:users"],
             "password" => "required",
         ]);
 
@@ -59,14 +61,14 @@ class AdminController extends Controller
         if ($result) {
             return redirect('/admin/create-state')->with('message', 'New State Created Successfully');
         }
-        
     }
 
-    function state_edit(Request $request, User $user){
+    function state_edit(Request $request, User $user)
+    {
 
         if ($request->method() == "GET") {
 
-            return view('admin.create-state.edit',[
+            return view('admin.create-state.edit', [
                 "user" => $user
             ]);
         }
@@ -77,20 +79,22 @@ class AdminController extends Controller
         return back()->with('message', 'state Updated Successfully');
     }
 
-    public function state_delete(User $user) {
+    public function state_delete(User $user)
+    {
 
         $user->delete();
 
-        return redirect('/admin/create-state')->with('error','State Deleted successfully :)');
+        return redirect('/admin/create-state')->with('error', 'State Deleted successfully :)');
     }
 
-    public function indicator(Request $request){
+    public function indicator(Request $request)
+    {
 
         if ($request->method() == "GET") {
-            
-            $state = User::where("role","=","0")->get();
-            $outputTable = outputTable::orderBy('id','DESC')->get();
-            return view("admin/create-indicator.index",[
+
+            $state = User::where("role", "=", "0")->get();
+            $outputTable = outputTable::orderBy('id', 'DESC')->get();
+            return view("admin/create-indicator.index", [
                 "outputTable" => $outputTable,
                 "state" => $state,
             ]);
@@ -117,18 +121,19 @@ class AdminController extends Controller
         ]);
 
         if ($result) {
-            return back()->with('message','Data Created Successfully');
-        }else {
-            return back()->with('error','Some went wrong Please Retry'); 
+            return back()->with('message', 'Data Created Successfully');
+        } else {
+            return back()->with('error', 'Some went wrong Please Retry');
         }
     }
 
-    public function indicator_edit(Request $request, outputTable $outputTable){
+    public function indicator_edit(Request $request, outputTable $outputTable)
+    {
 
         if ($request->method() == "GET") {
-            
-            return view('admin.create-indicator.edit',[
-              "outputTable" => $outputTable 
+
+            return view('admin.create-indicator.edit', [
+                "outputTable" => $outputTable
             ]);
         }
 
@@ -137,29 +142,31 @@ class AdminController extends Controller
         $result = $outputTable->update($data);
 
         if ($result) {
-            return back()->with('message','Data Updated Suucessfully');
-        }else{
-            return back()->with('error','something went wrong Retry');
+            return back()->with('message', 'Data Updated Suucessfully');
+        } else {
+            return back()->with('error', 'something went wrong Retry');
         }
     }
 
-    public function indicator_delete(outputTable $outputTable){
+    public function indicator_delete(outputTable $outputTable)
+    {
 
         $outputTable->delete();
 
-        return back()->with('message','Data Deleted Successfully');
+        return back()->with('message', 'Data Deleted Successfully');
     }
 
-    public function create_deliverable(Request $request, $id){
+    public function create_deliverable(Request $request, $id)
+    {
 
         if ($request->method() == "GET") {
 
-            $outputinfo = outputTable::where("id","=","$id")->get()->first();
-            $deliverables = deliverable_table::where("outputid","=","$outputinfo->id")
-            ->where("stateid","=","$outputinfo->stateid")
-            ->orderBy('id','DESC')
-            ->get();
-            return view('admin/create-indicator.create-deliverable',[
+            $outputinfo = outputTable::where("id", "=", "$id")->get()->first();
+            $deliverables = deliverable_table::where("outputid", "=", "$outputinfo->id")
+                ->where("stateid", "=", "$outputinfo->stateid")
+                ->orderBy('id', 'DESC')
+                ->get();
+            return view('admin/create-indicator.create-deliverable', [
                 "outputinfo" => $outputinfo,
                 "deliverables" => $deliverables,
             ]);
@@ -179,18 +186,19 @@ class AdminController extends Controller
         ]);
 
         if ($result) {
-            return back()->with('message','Deliverable Created Successfully');
-        }else{
-            return back()->with('error','Deliverable not created refresh and Retry');
+            return back()->with('message', 'Deliverable Created Successfully');
+        } else {
+            return back()->with('error', 'Deliverable not created refresh and Retry');
         }
     }
 
-    
-    public function create_deliverable_edit(Request $request, deliverable_table $deliverable_table){
+
+    public function create_deliverable_edit(Request $request, deliverable_table $deliverable_table)
+    {
 
         if ($request->method() == "GET") {
 
-            return view("admin/create-indicator.edit-deliverable",[
+            return view("admin/create-indicator.edit-deliverable", [
                 "deliverable_table" => $deliverable_table
             ]);
         }
@@ -199,37 +207,40 @@ class AdminController extends Controller
         // dd($data);
         $deliverable_table->update($data);
 
-        return back()->with('message','Deliverable Updated Successfully');
+        return back()->with('message', 'Deliverable Updated Successfully');
     }
 
-    public function create_deliverable_delete(deliverable_table $deliverable_table){
+    public function create_deliverable_delete(deliverable_table $deliverable_table)
+    {
 
         $deliverable_table->delete();
 
-        return back()->with('error','Deliverable deleted Successfully');
+        return back()->with('error', 'Deliverable deleted Successfully');
     }
 
-    public function deliverable_approve(Request $request){
+    public function deliverable_approve(Request $request)
+    {
 
         if ($request->method() == "GET") {
-            
-            $deliverableTbale = deliverableTbale::orderBy('id','DESC')->get();
-            $deliverableapprove = deliverableTbale::where("status","=","1")->orderBy('id','DESC')->get();
 
-            return view('admin/deliverable-approve.index',[
-               "tabledata" => $deliverableTbale,
-               "deliverableapprove" => $deliverableapprove,
+            $deliverableTbale = deliverableTbale::orderBy('id', 'DESC')->get();
+            $deliverableapprove = deliverableTbale::where("status", "=", "1")->orderBy('id', 'DESC')->get();
+
+            return view('admin/deliverable-approve.index', [
+                "tabledata" => $deliverableTbale,
+                "deliverableapprove" => $deliverableapprove,
             ]);
         }
     }
 
-    public function deliverable_approve_edit(Request $request, deliverableTbale $deliverableTbale ){
+    public function deliverable_approve_edit(Request $request, deliverableTbale $deliverableTbale)
+    {
 
         if ($request->method() == "GET") {
-            
-            $outputinfo = outputTable::where("id","=","$deliverableTbale->outputid")->get()->first();
 
-            return view('admin.deliverable-approve.edit',[
+            $outputinfo = outputTable::where("id", "=", "$deliverableTbale->outputid")->get()->first();
+
+            return view('admin.deliverable-approve.edit', [
                 "deliverableTbale" => $deliverableTbale,
                 "outputinfo" => $outputinfo,
             ]);
@@ -239,26 +250,61 @@ class AdminController extends Controller
         $result = $deliverableTbale->update($data);
 
         if ($result) {
-            return redirect()->route('deliverable_approve',$deliverableTbale->id)->with('message','Deliverable Approved Successfully');
+            return redirect()->route('deliverable_approve', $deliverableTbale->id)->with('message', 'Deliverable Approved Successfully');
         }
     }
 
     // for viewing single states 
-    public function stateinfo(Request $request, User $user) {
+    public function stateinfo(Request $request, User $user)
+    {
         if ($request->method() == "GET") {
 
-            $userinfo = User::where("id","$user->id")
-            ->where("role","=","0")
-            ->get()
-            ->first();
+            $userinfo = User::where("id", "$user->id")
+                ->where("role", "=", "0")
+                ->get()
+                ->first();
 
-            $outputinfo = outputTable::where("stateid","=","$user->id")->get();
+            $outputinfo = outputTable::where("stateid", "=", "$user->id")->get();
 
-            return view('admin.states.index',[
+            return view('admin.states.index', [
                 "userinfo" => $userinfo,
                 "outputinfo" => $outputinfo,
             ]);
         }
     }
 
+    public function statesDetails(Request $request, User $user, outputTable $outputTable)
+    {
+        if ($request->method() == "GET") {
+
+            // $outputTableinfo = outputTable::where("id", "=", "$outputTable->id")
+            //     ->where("stateid", "=", "$outputTable->stateid")
+            //     ->get()->first();
+
+            $delivrableinfo = deliverable_table::where("stateid", "=", "$outputTable->stateid")
+                ->where("outputid", "=", "$outputTable->id")
+                ->get();
+
+            $achievedinfo = deliverableTbale::where("stateid", "=", "$outputTable->stateid")
+                ->where("outputid", "=", "$outputTable->id")
+                ->get();
+            // dd($delivrableinfo);
+
+            // for getting year distinct 
+            $year = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->select('Year')
+            ->groupBy('Year')
+            ->get();
+
+            // dd($editinfodistinct);
+            return view('admin.states.state-details', [
+                "outputTableinfo" => $outputTable,
+                "delivrableinfo"  => $delivrableinfo,
+                "year" => $year,
+                "achievedinfo"  => $achievedinfo,
+
+            ]);
+        }
+    }
 }
