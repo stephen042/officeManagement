@@ -61,3 +61,4 @@ Route::post('/admin/deliverable/edit/{deliverableTbale}',[AdminController::class
 
 Route::get('/admin/states/{user}',[AdminController::class, 'stateinfo'])->middleware('auth')->name('states');
 Route::get('/admin/states/{user}/{outputTable}',[AdminController::class, 'statesDetails'])->middleware('auth')->name('statesDetails');
+Route::post('/admin/states/{user}/{outputTable}',[AdminController::class, 'selectedChart'])->middleware('auth')->name('selectedChart');

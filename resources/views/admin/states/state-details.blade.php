@@ -96,7 +96,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Download Record</h5>
+                <h5 class="card-title">Download Record Pdf</h5>
 
                 <form method="post" action="{{ route('pdf') }}">
                     @csrf
@@ -241,7 +241,7 @@
                                     type: 'doughnut',
                                     data: {
                                         labels: [
-                                            'Target',
+                                            'Target Remaining',
                                             'Achieved',
                                         ],
                                         datasets: [{
@@ -302,17 +302,16 @@
             </div>
         </div>
         <hr>
-        <div class="card">
+        <div class="card" style="background-color: lightgrey;">
             <div class="card-body">
                 <h5 class="card-title">Get Chart </h5>
-
-                <form method="post" action="" >
+                <form method="post" action="{{ route('selectedChart',[$outputTableinfo->stateid,$outputTableinfo->id]) }}" >
                     @csrf
 
-                    <div class="row mb-3" onclick="window.alert('function not ready yet')">
+                    <div class="row mb-3">                  
                         <label class="col-sm-2 col-form-label">Quarter</label>
                         <div class="col-sm-10">
-                            <select class="form-select" name="quarterpdf" aria-label="Default select example" required>
+                            <select class="form-select" name="quarterChart" aria-label="Default select example" required>
                                 <option selected disabled>Select Quarter</option>
                                 <option value="1">1</option>
                                 <option value="2">2</option>
@@ -329,7 +328,7 @@
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Year</label>
                         <div class="col-sm-10">
-                            <select class="form-select" name="yearpdf" aria-label="Default select example" required>
+                            <select class="form-select" name="yearChart" aria-label="Default select example" required>
                                 <option selected disabled>Select Year</option>
                                 
                                 @forelse ($year as $list)
@@ -345,12 +344,12 @@
                         </div>
                     </div>
 
-                    <input type="hidden" name="idpdf" value="{{ $outputTableinfo->id }}">
+                    <!-- <input type="hidden" name="idpdf" value="{{ $outputTableinfo->id }}"> -->
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Get Chart</label>
                         <div class="col-sm-10">
-                            <button type="submit" disabled class="btn btn-primary">Get Chart</button>
+                            <button type="submit" class="btn btn-primary">Get Chart</button>
                         </div>
                     </div>
                 </form>
@@ -360,8 +359,12 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Shows Base on Selection</h5>
-
+                        <h5 class="card-title">Shows Base on Selection - Target : {{ $outputTableinfo->target }}</h5>
+                            @php
+                                $target_remaining  = (int) session('target_remaining');
+                                $sum_of_data  = (int) session('sum_of_data');
+                                
+                            @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart4" style="max-height: 300px;"></canvas>
                         <script>
@@ -370,12 +373,12 @@
                                     type: 'doughnut',
                                     data: {
                                         labels: [
-                                            'Target',
+                                            'Target Remaining',
                                             'Achieved',
                                         ],
                                         datasets: [{
                                             label: 'My First Dataset',
-                                            data: [1, 1],
+                                            data: [ {{$target_remaining }},{{$sum_of_data }} ],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',

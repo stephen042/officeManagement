@@ -310,6 +310,7 @@ class AdminController extends Controller
             ->where("stateid", "=", "{$outputTable->stateid}")
             ->where("status", "=", "2")
             ->where("quarter", "=", "2")
+            ->where("Year","=","$yeardata")
             ->sum('acheived');
 
             $sum_of_quarter3 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
@@ -322,6 +323,7 @@ class AdminController extends Controller
             ->where("stateid", "=", "{$outputTable->stateid}")
             ->where("status", "=", "2")
             ->where("quarter", "=", "4")
+            ->where("Year","=","$yeardata")
             ->sum('acheived');
 
             // dd($editinfodistinct);
@@ -339,8 +341,26 @@ class AdminController extends Controller
         }
     }
 
-    public function selectedChart( Request $request, deliverableTbale $deliverableTbale)
+    public function selectedChart( Request $request, User $user, outputTable $outputTable)
     {
+        // $sum_of_data = '';
+        $request->validate([
+            "quarterChart" => "required",
+            "yearChart" => "required",
+        ]);
+
+        $data = (object) $request->all();
+
+        $sum_of_data = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+        ->where("stateid", "=", "{$outputTable->stateid}")
+        ->where("status", "=", "2")
+        ->where("quarter", "=", "$data->quarterChart")
+        ->where("Year","=","$data->yearChart")
+        ->sum('acheived');
+        // dd($sum_of_data);
+        $target_remaining = $outputTable->target - $sum_of_data;
         
+
+        return back()->with('sum_of_data',$sum_of_data)->with('target_remaining',$target_remaining);
     }
 }
