@@ -297,12 +297,40 @@ class AdminController extends Controller
             ->groupBy('Year')
             ->get();
 
+            $sum_of_quarter1 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->where("status", "=", "2")
+            ->where("quarter", "=", "1")
+            ->sum('acheived');
+
+            $sum_of_quarter2 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->where("status", "=", "2")
+            ->where("quarter", "=", "2")
+            ->sum('acheived');
+
+            $sum_of_quarter3 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->where("status", "=", "2")
+            ->where("quarter", "=", "3")
+            ->sum('acheived');
+
+            $sum_of_quarter4 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->where("status", "=", "2")
+            ->where("quarter", "=", "4")
+            ->sum('acheived');
+
             // dd($editinfodistinct);
             return view('admin.states.state-details', [
                 "outputTableinfo" => $outputTable,
                 "delivrableinfo"  => $delivrableinfo,
                 "year" => $year,
                 "achievedinfo"  => $achievedinfo,
+                "sum_of_quarter1" => $sum_of_quarter1,
+                "sum_of_quarter2" => $sum_of_quarter2,
+                "sum_of_quarter3" => $sum_of_quarter3,
+                "sum_of_quarter4" => $sum_of_quarter4,
 
             ]);
         }

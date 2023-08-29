@@ -153,8 +153,10 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Target - Achieved | Quater 1</h5>
-
+                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 1</h5>
+                        @php
+                            $Remaining_target1 = $outputTableinfo->target - $sum_of_quarter1 
+                        @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart" style="max-height: 300px;"></canvas>
                         <script>
@@ -163,12 +165,12 @@
                                     type: 'doughnut',
                                     data: {
                                         labels: [
-                                            'Target',
+                                            'Target Remaining',
                                             'Achieved',
                                         ],
                                         datasets: [{
                                             label: 'My First Dataset',
-                                            data: [300, 30],
+                                            data: [{{ $Remaining_target1 }},{{ $sum_of_quarter1  }}],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',
@@ -189,8 +191,10 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Target - Achieved | Quater 2</h5>
-
+                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 2</h5>
+                        @php
+                            $Remaining_target2 = $outputTableinfo->target - $sum_of_quarter2 
+                        @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart1" style="max-height: 300px;"></canvas>
                         <script>
@@ -199,12 +203,12 @@
                                     type: 'doughnut',
                                     data: {
                                         labels: [
-                                            'Target',
+                                            'Target Remaining',
                                             'Achieved',
                                         ],
                                         datasets: [{
                                             label: 'My second Dataset',
-                                            data: [300, 60, ],
+                                            data: [{{ $Remaining_target2 }},{{ $sum_of_quarter2  }}],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',
@@ -225,8 +229,10 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Target - Achieved | Quater 3</h5>
-
+                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 3</h5>
+                        @php
+                            $Remaining_target3 = $outputTableinfo->target - $sum_of_quarter3 
+                        @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart2" style="max-height: 300px;"></canvas>
                         <script>
@@ -240,7 +246,7 @@
                                         ],
                                         datasets: [{
                                             label: 'My second Dataset',
-                                            data: [300, 95, ],
+                                            data: [{{ $Remaining_target3 }},{{ $sum_of_quarter3  }}],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',
@@ -260,8 +266,10 @@
             <div class="col-lg-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Target - Achieved | Quater 4</h5>
-
+                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 4</h5>
+                        @php
+                            $Remaining_target4 = $outputTableinfo->target - $sum_of_quarter4 
+                        @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart3" style="max-height: 300px;"></canvas>
                         <script>
@@ -270,12 +278,12 @@
                                     type: 'doughnut',
                                     data: {
                                         labels: [
-                                            'Target',
+                                            'Target Remaining',
                                             'Achieved',
                                         ],
                                         datasets: [{
                                             label: 'My second Dataset',
-                                            data: [300, 100, ],
+                                            data: [{{ $Remaining_target4 }},{{ $sum_of_quarter4  }}],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',
@@ -294,8 +302,62 @@
             </div>
         </div>
         <hr>
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Get Chart </h5>
+
+                <form method="post" action="" >
+                    @csrf
+
+                    <div class="row mb-3" onclick="window.alert('function not ready yet')">
+                        <label class="col-sm-2 col-form-label">Quarter</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="quarterpdf" aria-label="Default select example" required>
+                                <option selected disabled>Select Quarter</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            @error('quarterpdf')
+                            <p class="text-danger">{{ $message }} </p>
+                            @enderror
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Year</label>
+                        <div class="col-sm-10">
+                            <select class="form-select" name="yearpdf" aria-label="Default select example" required>
+                                <option selected disabled>Select Year</option>
+                                
+                                @forelse ($year as $list)
+                                <option value="{{ $list->Year }}">{{ $list->Year }}</option>
+                                @empty
+                                <option selected disabled>No Data available </option>
+                                @endforelse
+
+                            </select>
+                            @error('yearpdf')
+                            <p class="text-danger">{{ $message }} </p>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="idpdf" value="{{ $outputTableinfo->id }}">
+
+                    <div class="row mb-3">
+                        <label class="col-sm-2 col-form-label">Get Chart</label>
+                        <div class="col-sm-10">
+                            <button type="submit" disabled class="btn btn-primary">Get Chart</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Shows Base on Selection</h5>
