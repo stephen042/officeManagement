@@ -6,6 +6,7 @@ use App\Models\deliverable_table;
 use App\Models\deliverableTbale;
 use App\Models\outputTable;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 // use Illuminate\Foundation\Auth\User;
 
@@ -296,11 +297,13 @@ class AdminController extends Controller
             ->select('Year')
             ->groupBy('Year')
             ->get();
-
+            $yeardata = Carbon::now()->format('Y');
+            // dd($yeardata);
             $sum_of_quarter1 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
             ->where("stateid", "=", "{$outputTable->stateid}")
             ->where("status", "=", "2")
             ->where("quarter", "=", "1")
+            ->where("Year","=","$yeardata")
             ->sum('acheived');
 
             $sum_of_quarter2 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
@@ -334,5 +337,10 @@ class AdminController extends Controller
 
             ]);
         }
+    }
+
+    public function selectedChart( Request $request, deliverableTbale $deliverableTbale)
+    {
+        
     }
 }
