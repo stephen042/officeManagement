@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\deliverable_table;
-use App\Models\deliverableTbale;
-use App\Models\outputTable;
-use App\Models\User;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\outputTable;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\deliverableTbale;
+use App\Models\deliverable_table;
 // use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
@@ -272,6 +273,7 @@ class AdminController extends Controller
                 "outputinfo" => $outputinfo,
             ]);
         }
+        
     }
 
     public function statesDetails(Request $request, User $user, outputTable $outputTable)
@@ -299,30 +301,9 @@ class AdminController extends Controller
             ->get();
             $yeardata = Carbon::now()->format('Y');
             // dd($yeardata);
-            $sum_of_quarter1 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
+            $sum_of_quarter = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
             ->where("stateid", "=", "{$outputTable->stateid}")
             ->where("status", "=", "2")
-            ->where("quarter", "=", "1")
-            ->where("Year","=","$yeardata")
-            ->sum('acheived');
-
-            $sum_of_quarter2 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-            ->where("stateid", "=", "{$outputTable->stateid}")
-            ->where("status", "=", "2")
-            ->where("quarter", "=", "2")
-            ->where("Year","=","$yeardata")
-            ->sum('acheived');
-
-            $sum_of_quarter3 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-            ->where("stateid", "=", "{$outputTable->stateid}")
-            ->where("status", "=", "2")
-            ->where("quarter", "=", "3")
-            ->sum('acheived');
-
-            $sum_of_quarter4 = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-            ->where("stateid", "=", "{$outputTable->stateid}")
-            ->where("status", "=", "2")
-            ->where("quarter", "=", "4")
             ->where("Year","=","$yeardata")
             ->sum('acheived');
 
@@ -332,10 +313,7 @@ class AdminController extends Controller
                 "delivrableinfo"  => $delivrableinfo,
                 "year" => $year,
                 "achievedinfo"  => $achievedinfo,
-                "sum_of_quarter1" => $sum_of_quarter1,
-                "sum_of_quarter2" => $sum_of_quarter2,
-                "sum_of_quarter3" => $sum_of_quarter3,
-                "sum_of_quarter4" => $sum_of_quarter4,
+                "sum_of_quarter" => $sum_of_quarter,
 
             ]);
         }
@@ -345,7 +323,6 @@ class AdminController extends Controller
     {
         // $sum_of_data = '';
         $request->validate([
-            "quarterChart" => "required",
             "yearChart" => "required",
         ]);
 
@@ -354,13 +331,32 @@ class AdminController extends Controller
         $sum_of_data = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
         ->where("stateid", "=", "{$outputTable->stateid}")
         ->where("status", "=", "2")
-        ->where("quarter", "=", "$data->quarterChart")
         ->where("Year","=","$data->yearChart")
         ->sum('acheived');
         // dd($sum_of_data);
         $target_remaining = $outputTable->target - $sum_of_data;
         
 
-        return back()->with('sum_of_data',$sum_of_data)->with('target_remaining',$target_remaining);
+        return back()->with('sum_of_data',$sum_of_data)->with('target_remaining',$target_remaining)->with('year',$data->yearChart);
+    }
+
+    public function stateinfoPdf(Request $request, User $user){
+
+        $date = Carbon::now()->format('Y-m-d');
+
+        $outputinfo = outputTable::where("stateid", "=", "$user->id")->get()->first();
+        $editinfo = deliverableTbale::select("output_tables.output","output_tables.target","output_tables.indicator","deliverable_tbales.*")
+        ->where("output_tables.stateid", "=", "$user->id")
+        ->orderBy('deliverable_tbales.id', 'DESC')
+        ->leftjoin('output_tables', 'deliverable_tbales.outputid', '=', 'output_tables.id')
+        ->get();
+
+        $pdf = Pdf::loadView('statespdf', [
+            'outputinfo' => $outputinfo,
+            'editinfo' => $editinfo,
+            // 'sum_achieved' => $sum_of_achieved,
+        ])
+        ->setPaper('a4', 'landscape');
+        return $pdf->download($user->state.'_report'.$date.'.pdf');
     }
 }

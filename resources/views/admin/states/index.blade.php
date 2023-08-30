@@ -18,7 +18,14 @@
     <!-- End Sidebar-->
 
     <main id="main" class="main">
-        <button onclick="window.history.back()" class="btn btn-primary my-2">back</button>
+        <div class="d-flex justify-content-between flex-wrap">
+            <button onclick="window.history.back()" class="btn btn-primary my-2 ">back</button>
+            <form action="{{ route('statesPdf',[$userinfo->id]) }}" method="POST">
+                @csrf
+                <button type="submit" class="btn btn-primary my-2">Generate PDF all Records</button>
+            </form> 
+        </div>
+
         <hr>
         <div class="card">
             <div class="card-body" style="overflow:auto;">

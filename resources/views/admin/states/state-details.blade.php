@@ -150,12 +150,12 @@
         </div>
         <hr>
         <div class="row ">
-            <div class="col-lg-3">
+            <div class="col-lg-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 1</h5>
+                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | {{ date('Y') }}</h5>
                         @php
-                            $Remaining_target1 = $outputTableinfo->target - $sum_of_quarter1 
+                            $Remaining_target = $outputTableinfo->target - $sum_of_quarter 
                         @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart" style="max-height: 300px;"></canvas>
@@ -170,120 +170,7 @@
                                         ],
                                         datasets: [{
                                             label: 'My First Dataset',
-                                            data: [{{ $Remaining_target1 }},{{ $sum_of_quarter1  }}],
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)'
-                                            ],
-                                            hoverOffset: 4
-                                        }]
-                                    }
-                                });
-                            });
-                        </script>
-                        <!-- End Doughnut CHart -->
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 2</h5>
-                        @php
-                            $Remaining_target2 = $outputTableinfo->target - $sum_of_quarter2 
-                        @endphp
-                        <!-- Doughnut Chart -->
-                        <canvas id="doughnutChart1" style="max-height: 300px;"></canvas>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-                                new Chart(document.querySelector('#doughnutChart1'), {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: [
-                                            'Target Remaining',
-                                            'Achieved',
-                                        ],
-                                        datasets: [{
-                                            label: 'My second Dataset',
-                                            data: [{{ $Remaining_target2 }},{{ $sum_of_quarter2  }}],
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)'
-                                            ],
-                                            hoverOffset: 4
-                                        }]
-                                    }
-                                });
-                            });
-                        </script>
-                        <!-- End Doughnut CHart -->
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 3</h5>
-                        @php
-                            $Remaining_target3 = $outputTableinfo->target - $sum_of_quarter3 
-                        @endphp
-                        <!-- Doughnut Chart -->
-                        <canvas id="doughnutChart2" style="max-height: 300px;"></canvas>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-                                new Chart(document.querySelector('#doughnutChart2'), {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: [
-                                            'Target Remaining',
-                                            'Achieved',
-                                        ],
-                                        datasets: [{
-                                            label: 'My second Dataset',
-                                            data: [{{ $Remaining_target3 }},{{ $sum_of_quarter3  }}],
-                                            backgroundColor: [
-                                                'rgb(255, 99, 132)',
-                                                'rgb(54, 162, 235)',
-                                                'rgb(255, 205, 86)'
-                                            ],
-                                            hoverOffset: 4
-                                        }]
-                                    }
-                                });
-                            });
-                        </script>
-                        <!-- End Doughnut CHart -->
-
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | Quater 4</h5>
-                        @php
-                            $Remaining_target4 = $outputTableinfo->target - $sum_of_quarter4 
-                        @endphp
-                        <!-- Doughnut Chart -->
-                        <canvas id="doughnutChart3" style="max-height: 300px;"></canvas>
-                        <script>
-                            document.addEventListener("DOMContentLoaded", () => {
-                                new Chart(document.querySelector('#doughnutChart3'), {
-                                    type: 'doughnut',
-                                    data: {
-                                        labels: [
-                                            'Target Remaining',
-                                            'Achieved',
-                                        ],
-                                        datasets: [{
-                                            label: 'My second Dataset',
-                                            data: [{{ $Remaining_target4 }},{{ $sum_of_quarter4  }}],
+                                            data: [{{ $Remaining_target }},{{ $sum_of_quarter }}],
                                             backgroundColor: [
                                                 'rgb(255, 99, 132)',
                                                 'rgb(54, 162, 235)',
@@ -307,23 +194,6 @@
                 <h5 class="card-title">Get Chart </h5>
                 <form method="post" action="{{ route('selectedChart',[$outputTableinfo->stateid,$outputTableinfo->id]) }}" >
                     @csrf
-
-                    <div class="row mb-3">                  
-                        <label class="col-sm-2 col-form-label">Quarter</label>
-                        <div class="col-sm-10">
-                            <select class="form-select" name="quarterChart" aria-label="Default select example" required>
-                                <option selected disabled>Select Quarter</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                            </select>
-                            @error('quarterpdf')
-                            <p class="text-danger">{{ $message }} </p>
-                            @enderror
-                        </div>
-
-                    </div>
 
                     <div class="row mb-3">
                         <label class="col-sm-2 col-form-label">Year</label>
@@ -360,8 +230,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Shows Base on Selection - Target : {{ $outputTableinfo->target }}</h5>
+                            @if (session()->has('year'))
+                            <span class="card-title">
+                                Chart for : {{ session('year') }}
+                            </span>
+                            @endif
+                        
                             @php
-                                $target_remaining  = (int) session('target_remaining');
+                                $target_remaining  =  (int) session('target_remaining') ? (int) session('target_remaining') :  $outputTableinfo->target  ;
                                 $sum_of_data  = (int) session('sum_of_data');
                                 
                             @endphp
