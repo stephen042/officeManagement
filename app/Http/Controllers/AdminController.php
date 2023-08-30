@@ -359,4 +359,24 @@ class AdminController extends Controller
         ->setPaper('a4', 'landscape');
         return $pdf->download($user->state.'_report'.$date.'.pdf');
     }
+
+    public function profile(Request $request, User $user){
+
+        if ($request->method() == "GET") {
+
+            return view('admin.profile.index', [
+                "user" => $user
+            ]);
+        }
+
+        
+        $data = $request->all();
+
+        $result = $user->update($data);
+
+        if ($result) {
+            return redirect()->route('profile',$user->id)->with('message', 'Profile Updated Successfully');
+        }
+        
+    }
 }

@@ -63,3 +63,5 @@ Route::get('/admin/states/{user}',[AdminController::class, 'stateinfo'])->middle
 Route::post('/admin/states/{user}',[AdminController::class, 'stateinfoPdf'])->middleware('auth')->name('statesPdf');
 Route::get('/admin/states/{user}/{outputTable}',[AdminController::class, 'statesDetails'])->middleware('auth')->name('statesDetails');
 Route::post('/admin/states/{user}/{outputTable}',[AdminController::class, 'selectedChart'])->middleware('auth')->name('selectedChart');
+Route::get('/admin/profile/{user}',[AdminController::class, 'profile'])->middleware('auth')->name('profile');
+Route::post('/admin/profile/{user}',[AdminController::class, 'profile'])->middleware('auth')->name('profile.update');
