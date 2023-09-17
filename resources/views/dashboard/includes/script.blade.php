@@ -12,3 +12,6 @@
 
 <!-- Template Main JS File -->
 <script src="{{ URL('assets/js/main.js') }}"></script>
+<script src="{{ URL('assets/js/jquery.js') }}"></script>
+
+@livewireScripts()

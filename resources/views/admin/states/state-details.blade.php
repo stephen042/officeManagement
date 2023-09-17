@@ -155,7 +155,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Target : {{ $outputTableinfo->target }} - Achieved | {{ date('Y') }}</h5>
                         @php
-                            $Remaining_target = $outputTableinfo->target - $sum_of_quarter 
+                            $Remaining_target = (int) $outputTableinfo->target - (int) $sum_of_quarter 
                         @endphp
                         <!-- Doughnut Chart -->
                         <canvas id="doughnutChart" style="max-height: 300px;"></canvas>

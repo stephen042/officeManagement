@@ -8,6 +8,12 @@
           <span>Indicators</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('event') }}">
+          <i class="bi bi-house"></i>
+          <span>Event</span>
+        </a>
+      </li>
 
       {{-- <li class="nav-item">
         <a class="nav-link collapsed" href="">

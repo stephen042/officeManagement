@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
 
 class HandlerController extends Controller
 {
@@ -168,6 +169,13 @@ class HandlerController extends Controller
             'sum_achieved' => $sum_of_achieved,
         ]);
         return $pdf->download($user->state.'_report'.$date.'.pdf');
+    }
+
+    public function event(Request $request){
+        if ($request->method() == "GET") {
+            
+            return view('dashboard.event.index');
+        }
     }
 
 

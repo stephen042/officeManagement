@@ -273,7 +273,6 @@ class AdminController extends Controller
                 "outputinfo" => $outputinfo,
             ]);
         }
-        
     }
 
     public function statesDetails(Request $request, User $user, outputTable $outputTable)
@@ -295,17 +294,17 @@ class AdminController extends Controller
 
             // for getting year distinct 
             $year = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-            ->where("stateid", "=", "{$outputTable->stateid}")
-            ->select('Year')
-            ->groupBy('Year')
-            ->get();
+                ->where("stateid", "=", "{$outputTable->stateid}")
+                ->select('Year')
+                ->groupBy('Year')
+                ->get();
             $yeardata = Carbon::now()->format('Y');
             // dd($yeardata);
             $sum_of_quarter = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-            ->where("stateid", "=", "{$outputTable->stateid}")
-            ->where("status", "=", "2")
-            ->where("Year","=","$yeardata")
-            ->sum('acheived');
+                ->where("stateid", "=", "{$outputTable->stateid}")
+                ->where("status", "=", "2")
+                ->where("Year", "=", "$yeardata")
+                ->sum('acheived');
 
             // dd($editinfodistinct);
             return view('admin.states.state-details', [
@@ -313,13 +312,13 @@ class AdminController extends Controller
                 "delivrableinfo"  => $delivrableinfo,
                 "year" => $year,
                 "achievedinfo"  => $achievedinfo,
-                "sum_of_quarter" => $sum_of_quarter,
+                "sum_of_quarter" =>  $sum_of_quarter,
 
             ]);
         }
     }
 
-    public function selectedChart( Request $request, User $user, outputTable $outputTable)
+    public function selectedChart(Request $request, User $user, outputTable $outputTable)
     {
         // $sum_of_data = '';
         $request->validate([
@@ -329,38 +328,40 @@ class AdminController extends Controller
         $data = (object) $request->all();
 
         $sum_of_data = deliverableTbale::where("outputid", "=", "{$outputTable->id}")
-        ->where("stateid", "=", "{$outputTable->stateid}")
-        ->where("status", "=", "2")
-        ->where("Year","=","$data->yearChart")
-        ->sum('acheived');
+            ->where("stateid", "=", "{$outputTable->stateid}")
+            ->where("status", "=", "2")
+            ->where("Year", "=", "$data->yearChart")
+            ->sum('acheived');
         // dd($sum_of_data);
         $target_remaining = $outputTable->target - $sum_of_data;
-        
 
-        return back()->with('sum_of_data',$sum_of_data)->with('target_remaining',$target_remaining)->with('year',$data->yearChart);
+
+        return back()->with('sum_of_data', $sum_of_data)->with('target_remaining', $target_remaining)->with('year', $data->yearChart);
     }
 
-    public function stateinfoPdf(Request $request, User $user){
+    public function stateinfoPdf(Request $request, User $user)
+    {
 
         $date = Carbon::now()->format('Y-m-d');
 
         $outputinfo = outputTable::where("stateid", "=", "$user->id")->get()->first();
-        $editinfo = deliverableTbale::select("output_tables.output","output_tables.target","output_tables.indicator","deliverable_tbales.*")
-        ->where("output_tables.stateid", "=", "$user->id")
-        ->orderBy('deliverable_tbales.id', 'DESC')
-        ->leftjoin('output_tables', 'deliverable_tbales.outputid', '=', 'output_tables.id')
-        ->get();
+        $editinfo = deliverableTbale::select("output_tables.output", "output_tables.target", "output_tables.indicator", "deliverable_tbales.*")
+            ->where("output_tables.stateid", "=", "$user->id")
+            ->orderBy('deliverable_tbales.id', 'DESC')
+            ->leftjoin('output_tables', 'deliverable_tbales.outputid', '=', 'output_tables.id')
+            ->get();
 
         $pdf = Pdf::loadView('statespdf', [
             'outputinfo' => $outputinfo,
             'editinfo' => $editinfo,
             // 'sum_achieved' => $sum_of_achieved,
         ])
-        ->setPaper('a4', 'landscape');
-        return $pdf->download($user->state.'_report'.$date.'.pdf');
+            ->setPaper('a4', 'landscape');
+        return $pdf->download($user->state . '_report' . $date . '.pdf');
     }
 
-    public function profile(Request $request, User $user){
+    public function profile(Request $request, User $user)
+    {
 
         if ($request->method() == "GET") {
 
@@ -369,14 +370,13 @@ class AdminController extends Controller
             ]);
         }
 
-        
+
         $data = $request->all();
 
         $result = $user->update($data);
 
         if ($result) {
-            return redirect()->route('profile',$user->id)->with('message', 'Profile Updated Successfully');
+            return redirect()->route('profile', $user->id)->with('message', 'Profile Updated Successfully');
         }
-        
     }
 }
