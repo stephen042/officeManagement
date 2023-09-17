@@ -292,31 +292,11 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">Indicator Number</label>
-                                    <div class="col-sm-10">
-                                        <select class="form-select" name="quarter" aria-label="Default select example">
-                                            <option selected disabled>Select Indicator Number </option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
-                                        </select>
-                                        @error('quarter')
-                                            <p class="text-danger">{{ $message }} </p>
-                                        @enderror
-                                    </div>
 
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputPassword" class="col-sm-2 col-form-label">Indicator</label>
-                                    <div class="col-sm-10">
-                                      <textarea class="form-control" readonly style="height: 100px"></textarea>
-                                    </div>
-                                </div>
+                                @livewire('output')
 
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" disabled  class="btn btn-primary">Submit</button>
                                     <button type="reset" class="btn btn-secondary">Reset</button>
                                 </div>
 
