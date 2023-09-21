@@ -7,6 +7,7 @@ use App\Models\outputTable;
 use Illuminate\Http\Request;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
+use App\Models\Event_tb;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -173,8 +174,45 @@ class HandlerController extends Controller
 
     public function event(Request $request){
         if ($request->method() == "GET") {
-            
-            return view('dashboard.event.index');
+
+            $state_id = Auth::user()->id;
+            return view('dashboard.event.index',[
+                "eventdata" => Event_tb::where("state_id","=","$state_id")->get(),
+            ]);
+        }
+
+        $validated = request()->validate([
+            "year" => "required",
+            "type_of_event" => "required",
+            "title_of_event" => "required",
+            "output" => "required",
+            "location_of_training" => "required",
+            "target_Bene" => "required",
+            "venue_of_training" => "required",
+            "quarter" => "required",
+            "expected_no_days" => "required|numeric",
+            "actual_no_days" => "required|numeric",
+            "start_date" => "required",
+            "start_date" => "required",
+            "end_date" => "required",
+            "p_female" => "required|numeric",
+            "p_male" => "required|numeric",
+            "p_pwd_male" => "required|numeric",
+            "p_pwd_female" => "required|numeric",
+            "p_total" => "required|numeric",
+            "activity_code" => "required",
+            "indicator_no" => "required",
+            "indicator" => "required",
+        ]);   
+
+        $validated['state_id'] = Auth::user()->id;
+
+        if ($validated) {
+            Event_tb::create($validated);
+
+            return back()->with('message','Record Created Successfully');
+        }else {
+            return back()->with('error','error :)REcord was not created ');
         }
     }
 

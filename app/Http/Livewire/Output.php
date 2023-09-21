@@ -17,7 +17,7 @@ class Output extends Component
     public function mount()
     {
         $stateid = Auth::user()->id;
-        $this->output = outputTable::where("stateid", "=", "{$stateid}")->orderBy('id','DESC')->get();
+        $this->output = outputTable::all();
 
         $this->indicator = collect();
 
