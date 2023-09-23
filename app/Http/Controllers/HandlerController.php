@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Illuminate\Auth\Events\Validated;
 use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
 
 class HandlerController extends Controller
@@ -203,19 +204,37 @@ class HandlerController extends Controller
             "activity_code" => "required",
             "indicator_no" => "required",
             "indicator" => "required",
-        ]);   
+        ]); 
+
+
 
         $validated['state_id'] = Auth::user()->id;
+        $validated['year'] = date("Y",strtotime($validated['year']));
+        $validated['output'] = implode(", ",$validated['output']);
+
+        // dd($validated);
 
         if ($validated) {
             Event_tb::create($validated);
 
             return back()->with('message','Record Created Successfully');
         }else {
-            return back()->with('error','error :)REcord was not created ');
+            return back()->with('error','error :)Record was not created ');
         }
+
+        return back()->with('error','Record was not created ');
     }
 
+    public function edit_event(Request $request, Event_tb $event_tb){
+
+        if ($request->method() == "GET") {
+            
+            // $type_of_event = ;
+            return view("dashboard.event.edit_event",[
+                "event_data" => $event_tb,
+            ]);
+        }
+    }
 
     public function logout(Request $request)
     {

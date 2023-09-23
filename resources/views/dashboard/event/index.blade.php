@@ -103,11 +103,11 @@
                                     <div class="col-sm-10">
                                         <select class="form-control choices-multiple" 
                                             id="select" 
-                                            name="output"
+                                            name="output[]"
                                             data-placeholder="choose output"
                                             multiple="multiple"
                                         >
-                                            {{-- <option selected disabled>Select Output</option> --}}
+                                            <!-- <option selected disabled>Select Output</option> -->
                                             <option value="output1">output1</option>
                                             <option value="output2">output2</option>
                                             <option value="output3">output3</option>
@@ -337,6 +337,7 @@
                                         <th scope="col"> Activity Code</th>
                                         <th scope="col"> Indicator Number</th>
                                         <th scope="col"> Indicator</th>
+                                        <th scope="col"> Edit</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -402,6 +403,12 @@
                                               {{ $data->indicator_no }}
                                             </td>
                                             <td>{{ $data->indicator }}</td>
+                                            <td class="d-flex justify-content-around">
+                                              <a href="{{ route('edit_event',$data->id) }}"
+                                                class="btn btn-info btn-sm mx-2"><i class="bi bi-info-circle"></i>
+                                                Edit
+                                              </a>
+                                            </td>
 
                                         </tr>
                                     @empty
