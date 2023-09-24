@@ -7,6 +7,7 @@ use App\Models\outputTable;
 use Illuminate\Http\Request;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
+use App\Models\event_loc_bene;
 use App\Models\Event_tb;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
@@ -177,8 +178,11 @@ class HandlerController extends Controller
         if ($request->method() == "GET") {
 
             $state_id = Auth::user()->id;
+            $location_bene = event_loc_bene::get();
+
             return view('dashboard.event.index',[
                 "eventdata" => Event_tb::where("state_id","=","$state_id")->get(),
+                "location_bene" => $location_bene,
             ]);
         }
 
@@ -188,7 +192,7 @@ class HandlerController extends Controller
             "title_of_event" => "required",
             "output" => "required",
             "location_of_training" => "required",
-            "target_Bene" => "required",
+            "target_bene" => "required",
             "venue_of_training" => "required",
             "quarter" => "required",
             "expected_no_days" => "required|numeric",
@@ -210,7 +214,9 @@ class HandlerController extends Controller
 
         $validated['state_id'] = Auth::user()->id;
         $validated['year'] = date("Y",strtotime($validated['year']));
+        // converting output to string so database can accept
         $validated['output'] = implode(", ",$validated['output']);
+        $validated['indicator_no'] = number_format((float) $validated['indicator_no'], 1);
 
         // dd($validated);
 
@@ -229,10 +235,36 @@ class HandlerController extends Controller
 
         if ($request->method() == "GET") {
             
-            // $type_of_event = ;
+            // converting output to array
+            // $output_data = explode(",",$event_tb->output);
+            $location_bene = event_loc_bene::get();
+            // dd($location_bene);
             return view("dashboard.event.edit_event",[
-                "event_data" => $event_tb,
+                // "output_data" => $output_data,
+                "event_tb" => $event_tb,
+                "location_bene" => $location_bene,
             ]);
+        }
+
+        $update = $request->validate([
+            "output" => "required",
+            "location_of_training" => "required",
+            "target_bene" => "required",
+            "indicator_no" => "required",
+            "indicator" => "required",
+        ]);
+                
+        $update = $request->all();
+        
+        $update['output'] =  implode(", ",$update['output']);
+        $update['indicator_no'] = number_format((float) $update['indicator_no'], 1);
+        // dd($update);
+
+        $result = $event_tb->update($update);
+        if ($result) {
+            return back()->with('message','Record updated Successfully');
+        }else {
+            return back()->with('error','error :)Record was not updated ');
         }
     }
 

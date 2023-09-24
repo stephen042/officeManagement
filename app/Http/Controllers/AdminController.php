@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
+use App\Models\Event_tb;
 // use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
@@ -378,5 +379,24 @@ class AdminController extends Controller
         if ($result) {
             return redirect()->route('profile', $user->id)->with('message', 'Profile Updated Successfully');
         }
+    }
+
+    public function event(Request $request)
+    {
+
+        if ($request->method() == "GET") {
+            
+            return view('admin.event.index',[
+                "eventdata" => Event_tb::get(),
+            ]);
+        }
+    }
+
+    public function event_delete(Event_tb $event_tb)
+    {
+
+        $event_tb->delete();
+
+        return back()->with('error', 'Event Deleted successfully :)');
     }
 }

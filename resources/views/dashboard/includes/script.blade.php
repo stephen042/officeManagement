@@ -14,4 +14,24 @@
 <script src="{{ URL('assets/js/main.js') }}"></script>
 <script src="{{ URL('assets/js/jquery.js') }}"></script>
 
+<script>
+
+let x = document.getElementById('EnD').defaultValue = 0 ;
+let y = document.getElementById('AnD').defaultValue = 0 ;
+
+let v1 = document.getElementById('PF').defaultValue = 0 ;
+let v2 = document.getElementById('PM').defaultValue = 0 ;
+let v3 = document.getElementById('PDW_PF').defaultValue = 0 ;
+let v4 = document.getElementById('PDW_PM').defaultValue = 0 ;
+function popup() {
+var value1 = Number(document.getElementById('PF').value);
+var value2 = Number(document.getElementById('PM').value);
+var value3 = Number(document.getElementById('PDW_PF').value);
+var value4 = Number(document.getElementById('PDW_PM').value);
+
+var total = value1 + value2 + value3 + value4;
+document.getElementById('total').value = total;
+} 
+</script>
+
 @livewireScripts()

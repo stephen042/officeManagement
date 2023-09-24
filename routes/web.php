@@ -33,7 +33,8 @@ Route::post('/dashboard',[HandlerController::class, "logout"])->name('logout');
 // d* event Routing
 Route::get('dashboard/event',[HandlerController::class, 'event'])->middleware('auth')->name('event');
 Route::post('dashboard/event',[HandlerController::class, 'event'])->middleware('auth')->name('event-post');
-Route::get('dashboard/event/edit_event/{id}',[HandlerController::class, 'edit_event'])->middleware('auth')->name('edit_event');
+Route::get('dashboard/event/edit_event/{event_tb}',[HandlerController::class, 'edit_event'])->middleware('auth')->name('edit_event');
+Route::post('dashboard/event/edit_event/{event_tb}',[HandlerController::class, 'edit_event'])->middleware('auth')->name('edit_event_post');
 
 
 
@@ -70,3 +71,6 @@ Route::get('/admin/states/{user}/{outputTable}',[AdminController::class, 'states
 Route::post('/admin/states/{user}/{outputTable}',[AdminController::class, 'selectedChart'])->middleware('auth')->name('selectedChart');
 Route::get('/admin/profile/{user}',[AdminController::class, 'profile'])->middleware('auth')->name('profile');
 Route::post('/admin/profile/{user}',[AdminController::class, 'profile'])->middleware('auth')->name('profile.update');
+
+Route::get('/admin/event',[AdminController::class, 'event'])->middleware('auth')->name('admin_event');
+Route::delete('/admin/event/{event_tb}',[AdminController::class, 'event_delete'])->middleware('auth')->name('admin_event_delete');

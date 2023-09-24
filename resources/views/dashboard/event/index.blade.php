@@ -57,7 +57,7 @@
                             <h5 class="card-title">Create an Event Record</h5>
 
                             <!-- General Form Elements -->
-                            <form method="post" action="">
+                            <form method="post" action="{{ route('event-post') }}">
                                 @csrf
                                 <div class="row mb-3">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Year</label>
@@ -107,12 +107,13 @@
                                             data-placeholder="choose output"
                                             multiple="multiple"
                                         >
-                                            <!-- <option selected disabled>Select Output</option> -->
+                                            <option selected disabled>Select Output</option>
                                             <option value="output1">output1</option>
                                             <option value="output2">output2</option>
                                             <option value="output3">output3</option>
+                                            <option value="output4">output4</option>
                                         </select>
-                                        @error('multi_output')
+                                        @error('output')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
@@ -124,8 +125,12 @@
                                     <div class="col-sm-10">
                                         <select class="form-select" name="location_of_training"
                                             aria-label="Default select example">
-                                            <option selected disabled>Location of training</option>
-                                            <option value="Kano LGA"> Kano LGA</option>
+                                                <option selected disabled>Select location</option>
+                                            @foreach ($location_bene as $data )
+                                                <option value="{{ $data->location_of_training }}">
+                                                    {{ $data->location_of_training }}
+                                                </option>
+                                            @endforeach 
                                         </select>
                                         @error('location_of_training')
                                             <p class="text-danger">{{ $message }} </p>
@@ -139,8 +144,12 @@
                                     <div class="col-sm-10">
                                         <select class="form-select" name="target_Bene"
                                             aria-label="Default select example">
-                                            <option selected disabled>Select Target Beneficiaries</option>
-                                            <option value="Mr Jones">Mr Jones</option>
+                                                <option selected disabled>Select Target Beneficiaries</option>
+                                            @foreach ($location_bene as $data )
+                                                <option value="{{ $data->target_bene }}">
+                                                    {{$data->target_bene}}
+                                                </option>
+                                            @endforeach
                                         </select>
                                         @error('target_Bene')
                                             <p class="text-danger">{{ $message }} </p>
@@ -152,11 +161,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Venue of the Training</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="venue_of_training"
-                                            aria-label="Default select example">
-                                            <option selected disabled>Select Venue of the Training</option>
-                                            <option value="School">School</option>
-                                        </select>
+                                    <input type="text" name="venue_of_training" class="form-control">
                                         @error('venue_of_training')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -223,9 +228,9 @@
                                 </div>
                                 <hr>
                                 <div class="row mb-3">
-                                    {{-- <center> --}}
+                                   
                                     <label class="col-sm-2 col-form-label fs-5" style="font-weight: bold">Participants</label>
-                                    {{-- </center> --}}
+                                    
                                 </div>
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Female</label>
@@ -341,7 +346,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($eventdata as $info => $data)
+                                    @foreach ($eventdata as $info => $data)
                                         <tr>
                                             <th scope="row">{{ $info +1 }}</th>
                                             <td>{{ date("Y",strtotime($data->year)) }}</td>
@@ -411,16 +416,7 @@
                                             </td>
 
                                         </tr>
-                                    @empty
-                                        <tr>
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="d-flex justify-content-around">
-                                            </td>
-                                        </tr>
-                                    @endforelse
+                                    @endforeach
                                 </tbody>
                             </table>
                             <!-- End Table with stripped rows -->
@@ -441,25 +437,6 @@
 
     @include('dashboard.includes.script')
 
-    <script>
-
-            let x = document.getElementById('EnD').defaultValue = 0 ;
-            let y = document.getElementById('AnD').defaultValue = 0 ;
-
-            let v1 = document.getElementById('PF').defaultValue = 0 ;
-            let v2 = document.getElementById('PM').defaultValue = 0 ;
-            let v3 = document.getElementById('PDW_PF').defaultValue = 0 ;
-            let v4 = document.getElementById('PDW_PM').defaultValue = 0 ;
-        function popup() {
-            var value1 = Number(document.getElementById('PF').value);
-            var value2 = Number(document.getElementById('PM').value);
-            var value3 = Number(document.getElementById('PDW_PF').value);
-            var value4 = Number(document.getElementById('PDW_PM').value);
-            
-            var total = value1 + value2 + value3 + value4;
-            document.getElementById('total').value = total;
-        } 
-    </script>
     
 </body>
 

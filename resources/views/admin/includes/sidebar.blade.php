@@ -29,6 +29,13 @@
           <span>Pending Requests</span>
         </a>
       </li>
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('admin_event') }}">
+          <i class="bi bi-menu-button-wide"></i>
+          <span>Events</span>
+        </a>
+      </li>
       <li class="nav-item">
         <a class="nav-link collapsed" href="{{ route('profile',[Auth::user()->id])}}">
           <i class="bi bi-person"></i>
