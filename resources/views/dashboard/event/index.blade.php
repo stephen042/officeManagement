@@ -20,11 +20,10 @@
     <main id="main" class="main">
 
         <div class="pagetitle">
-            <h1>Indicator Edit</h1>
+            <h1>Event Section</h1>
             <nav>
                 <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="index.html">Indicator</a></li>
-                    {{-- <li class="breadcrumb-item">Tables</li> --}}
+                    <li class="breadcrumb-item"><a href="index.html">Event</a></li>
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
@@ -62,7 +61,7 @@
                                 <div class="row mb-3">
                                     <label for="inputDate" class="col-sm-2 col-form-label">Year</label>
                                     <div class="col-sm-10">
-                                        <input type="date" name="year" class="form-control">
+                                        <input type="date" name="year" value="{{ old('year') }}" class="form-control">
                                         @error('year')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -74,9 +73,13 @@
                                     <label class="col-sm-2 col-form-label">Type of Event</label>
                                     <div class="col-sm-10">
                                         <select class="form-select" name="type_of_event" aria-label="Default select example">
-                                            <option selected disabled>Type </option>
-                                            <option value="Workshop">Workshop</option>
-                                            <option value="Training">Training</option>
+                                            <option selected disabled>type</option>
+                                            <option value="Workshop" {{ old("type_of_event") == "Workshop"? "selected":""  }}>
+                                                Workshop
+                                            </option>
+                                            <option value="Training"  {{ old("type_of_event") == "Training"? "selected":"" }}>
+                                                Training
+                                            </option>
                                         </select>
                                         @error('type_of_event')
                                             <p class="text-danger">{{ $message }} </p>
@@ -90,7 +93,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Title of training or Event</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="title_of_event" class="form-control">
+                                        <input type="text" value="{{ old('title_of_event') }}" name="title_of_event" class="form-control">
                                         @error('title_of_event')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -108,10 +111,10 @@
                                             multiple="multiple"
                                         >
                                             <option selected disabled>Select Output</option>
-                                            <option value="output1">output1</option>
-                                            <option value="output2">output2</option>
-                                            <option value="output3">output3</option>
-                                            <option value="output4">output4</option>
+                                            <option value="output1" {{ old("output1") == "Workshop"? "selected":""  }}>output1</option>
+                                            <option value="output2"  {{ old("output2") == "Workshop"? "selected":""  }}>output2</option>
+                                            <option value="output3"  {{ old("output3") == "Workshop"? "selected":""  }}>output3</option>
+                                            <option value="output4"  {{ old("output4") == "Workshop"? "selected":""  }}>output4</option>
                                         </select>
                                         @error('output')
                                             <p class="text-danger">{{ $message }} </p>
@@ -127,7 +130,7 @@
                                             aria-label="Default select example">
                                                 <option selected disabled>Select location</option>
                                             @foreach ($location_bene as $data )
-                                                <option value="{{ $data->location_of_training }}">
+                                                <option value="{{ $data->location_of_training }}"  {{ old("location_of_training") == $data->location_of_training ? "selected":""  }}>
                                                     {{ $data->location_of_training }}
                                                 </option>
                                             @endforeach 
@@ -142,16 +145,18 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Target Beneficiaries</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="target_Bene"
+                                        <select class="form-select" name="target_bene"
                                             aria-label="Default select example">
                                                 <option selected disabled>Select Target Beneficiaries</option>
                                             @foreach ($location_bene as $data )
-                                                <option value="{{ $data->target_bene }}">
+                                                <option value="{{ $data->target_bene }}" 
+                                                {{ old("target_bene") == $data->target_bene ? "selected":""  }}       
+                                                >
                                                     {{$data->target_bene}}
                                                 </option>
                                             @endforeach
                                         </select>
-                                        @error('target_Bene')
+                                        @error('target_bene')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
@@ -161,7 +166,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Venue of the Training</label>
                                     <div class="col-sm-10">
-                                    <input type="text" name="venue_of_training" class="form-control">
+                                    <input type="text" name="venue_of_training" value="{{ old('venue_of_training') }}" class="form-control">
                                         @error('venue_of_training')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -173,10 +178,10 @@
                                     <div class="col-sm-10">
                                         <select class="form-select" name="quarter" aria-label="Default select example">
                                             <option selected disabled>Select Quarter </option>
-                                            <option value="1">1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                            <option value="4">4</option>
+                                            <option value="1" {{ old("quarter") == "1" ? "selected":""  }}>1</option>
+                                            <option value="2" {{ old("quarter") == "2" ? "selected":""  }}>2</option>
+                                            <option value="3" {{ old("quarter") == "3" ? "selected":""  }}>3</option>
+                                            <option value="4" {{ old("quarter") == "4" ? "selected":""  }}>4</option>
                                         </select>
                                         @error('quarter')
                                             <p class="text-danger">{{ $message }} </p>
@@ -188,7 +193,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label ">Expected Number of Days</label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="expected_no_days" id="EnD" class="form-control">
+                                        <input type="number" value="{{ old('expected_no_days') }}" name="expected_no_days" id="EnD" class="form-control">
                                         @error('expected_no_days')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -199,7 +204,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label ">Actual Number of Days</label>
                                     <div class="col-sm-10">
-                                        <input type="number" name="actual_no_days" id="AnD" class="form-control">
+                                        <input type="number" value="{{ old('actual_no_days') }}"  name="actual_no_days" id="AnD" class="form-control">
                                         @error('actual_no_days')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -209,7 +214,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Start Date</label>
                                     <div class="col-sm-10">
-                                        <input type="date" name="start_date" class="form-control">
+                                        <input type="date" value="{{ old('start_date') }}"  name="start_date" class="form-control">
                                         @error('start_date')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -219,7 +224,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">End Date</label>
                                     <div class="col-sm-10">
-                                        <input type="date" name="end_date" class="form-control">
+                                        <input type="date" value="{{ old('end_date') }}" name="end_date" class="form-control">
                                         @error('end_date')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -235,7 +240,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Female</label>
                                     <div class="col-sm-10">
-                                        <input type="number" id="PF" onkeyup="popup()" name="p_female" class="form-control  count ">
+                                        <input type="number" value="{{ old('p_female') }}" id="PF" onkeyup="popup()" name="p_female" class="form-control  count ">
                                         @error('p_female')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -245,7 +250,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Male</label>
                                     <div class="col-sm-10">
-                                        <input type="number" id="PM" onkeyup="popup()" name="p_male" class="form-control  count ">
+                                        <input type="number" value="{{ old('p_male') }}" id="PM" onkeyup="popup()" name="p_male" class="form-control  count ">
                                         @error('p_male')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -257,7 +262,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Male</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="number" id="PDW_PM" onkeyup="popup()" name="p_pwd_male" class="form-control count ">
+                                        <input type="number" value="{{ old('p_pwd_male') }}" id="PDW_PM" onkeyup="popup()" name="p_pwd_male" class="form-control count ">
                                         @error('p_pwd_male')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -267,7 +272,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Female</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="number" id="PDW_PF" onkeyup="popup()" name="p_pwd_female" class="form-control count ">
+                                        <input type="number" value="{{ old('p_pwd_female') }}" id="PDW_PF" onkeyup="popup()" name="p_pwd_female" class="form-control count ">
                                         @error('p_pwd_female')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -277,7 +282,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Total Participants</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="number" readonly id="total" name="p_total" value="" class="form-control">
+                                        <input type="number" value="{{ old('p_total') }}" readonly id="total" name="p_total" value="" class="form-control">
                                         @error('p_total')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror
@@ -287,7 +292,7 @@
                                 <div class="row mb-3">
                                     <label for="inputText" class="col-sm-2 col-form-label">Activity Code</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="text" id="AC" name="activity_code" class="form-control">
+                                        <input type="text" id="AC" value="{{ old('activity_code') }}" name="activity_code" class="form-control">
                                         @error('activity_code')
                                             <p class="text-danger">{{ $message }} </p>
                                         @enderror

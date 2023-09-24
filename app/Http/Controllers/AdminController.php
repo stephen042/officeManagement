@@ -344,7 +344,7 @@ class AdminController extends Controller
     public function stateinfoPdf(Request $request, User $user)
     {
 
-        $date = Carbon::now()->format('Y-m-d');
+        $date = Carbon::now()->format('Y-m-d-H-i-a');
 
         $outputinfo = outputTable::where("stateid", "=", "$user->id")->get()->first();
         $editinfo = deliverableTbale::select("output_tables.output", "output_tables.target", "output_tables.indicator", "deliverable_tbales.*")
@@ -358,7 +358,7 @@ class AdminController extends Controller
             'editinfo' => $editinfo,
             // 'sum_achieved' => $sum_of_achieved,
         ])
-            ->setPaper('a4', 'landscape');
+            ->setPaper('a1', 'landscape');
         return $pdf->download($user->state . '_report' . $date . '.pdf');
     }
 
@@ -386,25 +386,69 @@ class AdminController extends Controller
     {
 
         if ($request->method() == "GET") {
-            
-            return view('admin.event.index',[
+
+            // for getting year distinct 
+            $year = Event_tb::select('year')
+                ->groupBy('year')
+                ->get();
+
+            return view('admin.event.index', [
+                "year" => $year,
                 "eventdata" => Event_tb::get(),
                 "location_bene" => event_loc_bene::get(),
             ]);
         }
 
-        $validated = $request->validate([
-            "location_of_training" => "required",
-            "target_bene" => "required",
-        ]);
+        $validated = $request->all();
 
         if ($validated) {
 
             event_loc_bene::create($validated);
 
-            return back()->with('message','Record Created Successfully');
-        }else {
-            return back()->with('error','error :)Record was not created ');
+            return back()->with('message', 'Record Created Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not created ');
+        }
+    }
+
+    public function all_event_Pdf(Request $request, Event_tb $event_tb, $name)
+    {
+        if ($name == 'all') {
+            $date = Carbon::now()->format('Y-m-d-H-i-a');
+
+            $editinfo = Event_tb::get();
+
+            $pdf = Pdf::loadView('admin.event.all-event-pdf', [
+                'editinfo' => $editinfo,
+                // 'sum_achieved' => $sum_of_achieved,
+            ])
+                ->setPaper('a1', 'landscape');
+            return $pdf->stream('All_event_report' . $date . '.pdf');
+
+        } elseif ($name == 'filtered') {
+
+            $data = (object) $request->all();
+
+            // to validate the data
+            $request->validate([
+                "yearpdf" => "required",
+                "quarterpdf" => "required",
+            ]);
+
+            $editinfo = [];
+
+            $editinfo = Event_tb::where("Year", "=", "{$data->yearpdf}")
+                ->where("quarter", "=", "{$data->quarterpdf}")
+                ->get();
+
+
+            $date = Carbon::now()->format('Y-m-d-H-i-a');
+
+            $pdf = Pdf::loadView('admin.event.all-event-pdf', [
+                'editinfo' => $editinfo,
+            ])->setPaper('a1', 'landscape');
+            return $pdf->stream($data->yearpdf . '_report' . $date . '.pdf');
+
         }
     }
 
@@ -416,14 +460,14 @@ class AdminController extends Controller
         return back()->with('error', 'Event Deleted successfully :)');
     }
 
-    
+
     public function location_bene(Request $request, event_loc_bene $event_loc_bene)
     {
 
         if ($request->method() == "GET") {
-            
-            return view('admin.event.edit_loc_bene',[
-                "location_bene" => event_loc_bene::where("id","=","$event_loc_bene->id")->get()->first(),
+
+            return view('admin.event.edit_loc_bene', [
+                "location_bene" => event_loc_bene::where("id", "=", "$event_loc_bene->id")->get()->first(),
             ]);
         }
 
@@ -433,12 +477,12 @@ class AdminController extends Controller
 
             $event_loc_bene->update($update);
 
-            return back()->with('message','Record updated Successfully');
-        }else {
-            return back()->with('error','error :)Record was not updated ');
+            return back()->with('message', 'Record updated Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not updated ');
         }
     }
-    
+
     public function location_bene_delete(event_loc_bene $event_loc_bene)
     {
 
@@ -446,7 +490,4 @@ class AdminController extends Controller
 
         return redirect()->route('admin_event')->with('error', 'Record Deleted successfully :)');
     }
-
-
-
 }
