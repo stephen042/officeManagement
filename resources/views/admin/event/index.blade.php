@@ -53,6 +53,91 @@
                 <div class="col-lg-12">
 
                     <div class="card">
+                        <div class="card-body p-5" style="overflow:auto;">
+
+                            <form action="{{ route('admin_event') }}" method="post">
+                                @method('POST')
+                                @csrf
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Output</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEmail" name="location_of_training" placeholder="location of training" required>
+                                        @error('location_of_training')
+                                        <p class="text-danger">{{ $message }} </p>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label for="inputEmail3" class="col-sm-2 col-form-label">Target Beneficiaries</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputEmail" name="target_bene" placeholder="target" required>
+                                        @error('target_bene')
+                                        <p class="text-danger">{{ $message }} </p>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="text-center">
+                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                            </form>
+                            <!-- End Horizontal Form -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr>
+        <div class="card">
+            <div class="card-body" style="overflow:auto;">
+                <h5 class="card-title">List Of Indicator</h5>
+                <!-- Table with stripped rows -->
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Location of training</th>
+                            <th scope="col">Target Beneficiaries</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse ($location_bene as $infos => $data)
+                            <tr>
+                                <th scope="row">{{ $infos + 1 }}</th>
+                                <td>{{ ucwords($data->location_of_training) }}</td>
+                                <td>{{ $data->target_bene }}</td>
+                                <td class="">
+                                    <div class="d-flex">
+                                    <a href="{{ route('location_bene', $data->id) }}"
+                                        class="btn btn-info btn-sm mx-2 text-light"> Edit</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <th scope="row"></th>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        @endforelse
+
+                    </tbody>
+                </table>
+                <!-- End Table with stripped rows -->
+
+            </div>
+        </div>
+
+        <hr>
+        <section class="section">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="card">
                         <div class="card-body" style="overflow:auto;">
                             <!-- Table with stripped rows -->
                             <table class="table datatable">

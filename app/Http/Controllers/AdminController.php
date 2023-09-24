@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
+use App\Models\event_loc_bene;
 use App\Models\Event_tb;
 // use Illuminate\Foundation\Auth\User;
 
@@ -388,7 +389,22 @@ class AdminController extends Controller
             
             return view('admin.event.index',[
                 "eventdata" => Event_tb::get(),
+                "location_bene" => event_loc_bene::get(),
             ]);
+        }
+
+        $validated = $request->validate([
+            "location_of_training" => "required",
+            "target_bene" => "required",
+        ]);
+
+        if ($validated) {
+
+            event_loc_bene::create($validated);
+
+            return back()->with('message','Record Created Successfully');
+        }else {
+            return back()->with('error','error :)Record was not created ');
         }
     }
 
@@ -399,4 +415,38 @@ class AdminController extends Controller
 
         return back()->with('error', 'Event Deleted successfully :)');
     }
+
+    
+    public function location_bene(Request $request, event_loc_bene $event_loc_bene)
+    {
+
+        if ($request->method() == "GET") {
+            
+            return view('admin.event.edit_loc_bene',[
+                "location_bene" => event_loc_bene::where("id","=","$event_loc_bene->id")->get()->first(),
+            ]);
+        }
+
+        $update = $request->all();
+
+        if ($update) {
+
+            $event_loc_bene->update($update);
+
+            return back()->with('message','Record updated Successfully');
+        }else {
+            return back()->with('error','error :)Record was not updated ');
+        }
+    }
+    
+    public function location_bene_delete(event_loc_bene $event_loc_bene)
+    {
+
+        $event_loc_bene->delete();
+
+        return redirect()->route('admin_event')->with('error', 'Record Deleted successfully :)');
+    }
+
+
+
 }

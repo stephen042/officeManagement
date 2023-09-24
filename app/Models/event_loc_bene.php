@@ -9,4 +9,6 @@ class event_loc_bene extends Model
 {
     use HasFactory;
     public $table = 'event_loc_benes';
+    public $guarded = [];
+
 }
