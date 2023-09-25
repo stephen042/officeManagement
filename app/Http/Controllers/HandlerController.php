@@ -216,7 +216,11 @@ class HandlerController extends Controller
         $validated['year'] = date("Y",strtotime($validated['year']));
         // converting output to string so database can accept
         $validated['output'] = implode(", ",$validated['output']);
-        $validated['indicator_no'] = number_format($validated['indicator_no'], 3) ;
+        
+        // to get the output number
+        $indicator = outputTable::where("indicator","=","{$validated['indicator']}")->get()->first();
+
+        $validated['indicator_no'] = $indicator->output;
 
         // dd($validated);
 
