@@ -216,7 +216,7 @@ class HandlerController extends Controller
         $validated['year'] = date("Y",strtotime($validated['year']));
         // converting output to string so database can accept
         $validated['output'] = implode(", ",$validated['output']);
-        $validated['indicator_no'] = number_format((float) $validated['indicator_no'], 1);
+        $validated['indicator_no'] = (float) $validated['indicator_no'] ;
 
         // dd($validated);
 
@@ -257,7 +257,7 @@ class HandlerController extends Controller
         $update = $request->all();
         
         $update['output'] =  implode(", ",$update['output']);
-        $update['indicator_no'] = number_format((float) $update['indicator_no'], 1);
+        $update['indicator_no'] = (float) $update['indicator_no'];
         // dd($update);
 
         $result = $event_tb->update($update);

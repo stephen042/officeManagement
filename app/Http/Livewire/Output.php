@@ -17,8 +17,9 @@ class Output extends Component
     public function mount()
     {
         $stateid = Auth::user()->id;
-        $this->output = outputTable::all();
-
+        $this->output = (object) outputTable::get();
+        // $this->output .= outputTable::get(['indicator']);
+        // dd($this->output);
         $this->indicator = collect();
 
     }
