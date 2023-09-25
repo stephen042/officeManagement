@@ -423,7 +423,7 @@ class AdminController extends Controller
                 // 'sum_achieved' => $sum_of_achieved,
             ])
                 ->setPaper('a1', 'landscape');
-            return $pdf->stream('All_event_report' . $date . '.pdf');
+            return $pdf->download('All_event_report' . $date . '.pdf');
 
         } elseif ($name == 'filtered') {
 
@@ -447,7 +447,7 @@ class AdminController extends Controller
             $pdf = Pdf::loadView('admin.event.all-event-pdf', [
                 'editinfo' => $editinfo,
             ])->setPaper('a1', 'landscape');
-            return $pdf->stream($data->yearpdf . '_report' . $date . '.pdf');
+            return $pdf->download($data->yearpdf . '_report' . $date . '.pdf');
 
         }
     }
