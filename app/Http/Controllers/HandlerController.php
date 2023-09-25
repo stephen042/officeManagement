@@ -216,7 +216,7 @@ class HandlerController extends Controller
         $validated['year'] = date("Y",strtotime($validated['year']));
         // converting output to string so database can accept
         $validated['output'] = implode(", ",$validated['output']);
-        $validated['indicator_no'] = (float) $validated['indicator_no'] ;
+        $validated['indicator_no'] = number_format($validated['indicator_no'], 3) ;
 
         // dd($validated);
 
