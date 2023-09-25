@@ -180,7 +180,9 @@ class HandlerController extends Controller
         if ($request->method() == "GET") {
 
             $state_id = Auth::user()->id;
-            $location_bene = event_loc_bene::get();
+            $location_bene = event_loc_bene::whereNotNull('location_of_training')
+            ->whereNotNull('target_bene')
+            ->get();
 
             return view('dashboard.event.index',[
                 "eventdata" => Event_tb::where("state_id","=","$state_id")->get(),
