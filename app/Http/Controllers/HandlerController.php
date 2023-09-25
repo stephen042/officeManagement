@@ -3,16 +3,18 @@
 namespace App\Http\Controllers;
 
 // use Barryvdh\DomPDF\PDF;
+use Carbon\Carbon;
+use App\Models\Event_tb;
 use App\Models\outputTable;
+use App\Exports\EventExport;
 use Illuminate\Http\Request;
+use App\Models\event_loc_bene;
+use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
-use App\Models\event_loc_bene;
-use App\Models\Event_tb;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
-use Barryvdh\DomPDF\Facade\Pdf;
-use Carbon\Carbon;
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Auth\Events\Validated;
 use Symfony\Component\HttpFoundation\RateLimiter\RequestRateLimiterInterface;
 

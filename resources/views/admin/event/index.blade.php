@@ -190,6 +190,7 @@
                                 @csrf
                                 <button type="submit" class="btn btn-primary my-2">Generate PDF all Records</button>
                             </form>
+                            <a href="{{ route('event_csv') }}" class="btn btn-primary my-2">Generate CSV all Records</a>
                         </div>
                         <div class="card-body" style="overflow:auto;">
                             <!-- Table with stripped rows -->

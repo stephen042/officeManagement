@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\User;
+use App\Models\Event_tb;
 use App\Models\outputTable;
+use App\Exports\EventExport;
 use Illuminate\Http\Request;
+use App\Models\event_loc_bene;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
-use App\Models\event_loc_bene;
-use App\Models\Event_tb;
+use Maatwebsite\Excel\Facades\Excel;
 // use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
@@ -450,6 +452,11 @@ class AdminController extends Controller
             return $pdf->download($data->yearpdf . '_report' . $date . '.pdf');
 
         }
+    }
+        
+    public function event_csv() {
+        $date = Carbon::now()->format('Y-m-d-H-i-a');
+        return Excel::download( new EventExport , 'Event-record-'.$date.'.csv');
     }
 
     public function event_delete(Event_tb $event_tb)

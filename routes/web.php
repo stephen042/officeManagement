@@ -73,6 +73,7 @@ Route::get('/admin/profile/{user}',[AdminController::class, 'profile'])->middlew
 Route::post('/admin/profile/{user}',[AdminController::class, 'profile'])->middleware('auth')->name('profile.update');
 
 Route::get('/admin/event',[AdminController::class, 'event'])->middleware('auth')->name('admin_event');
+Route::get('/admin/event/event_csv',[AdminController::class, 'event_csv'])->middleware('auth')->name('event_csv');
 Route::post('/admin/event/{name}',[AdminController::class, 'all_event_Pdf'])->middleware('auth')->name('all_event_pdf');
 Route::put('/admin/event',[AdminController::class, 'event'])->middleware('auth')->name('admin_event_post');
 Route::delete('/admin/event/{event_tb}',[AdminController::class, 'event_delete'])->middleware('auth')->name('admin_event_delete');
