@@ -322,6 +322,7 @@
 
                     <div class="card">
                         <div class="card-body" style="overflow:auto;">
+                        <a href="{{ route('event_csv') }}" class="btn btn-primary my-2">Generate CSV all Records</a>
                             <!-- Table with stripped rows -->
                             <table class="table datatable">
                                 <thead>

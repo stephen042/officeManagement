@@ -32,6 +32,7 @@ Route::post('/dashboard',[HandlerController::class, "logout"])->name('logout');
 
 // d* event Routing
 Route::get('dashboard/event',[HandlerController::class, 'event'])->middleware('auth')->name('event');
+Route::get('dashboard/state_csv',[HandlerController::class, 'state_csv'])->middleware('auth')->name('state_csv');
 Route::post('dashboard/event',[HandlerController::class, 'event'])->middleware('auth')->name('event-post');
 Route::get('dashboard/event/edit_event/{event_tb}',[HandlerController::class, 'edit_event'])->middleware('auth')->name('edit_event');
 Route::post('dashboard/event/edit_event/{event_tb}',[HandlerController::class, 'edit_event'])->middleware('auth')->name('edit_event_post');

@@ -239,6 +239,11 @@ class HandlerController extends Controller
         return back()->with('error','Record was not created ');
     }
 
+    // public function state_csv(Request $request){
+    //     $date = Carbon::now()->format('Y-m-d-H-i-a');
+    //     return Excel::download( new stateEvent , 'stateEvent-record-'.$date.'.csv');
+    // }
+
     public function edit_event(Request $request, Event_tb $event_tb){
 
         if ($request->method() == "GET") {
