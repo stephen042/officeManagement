@@ -14,6 +14,8 @@
 <script src="{{ URL('assets/js/main.js') }}"></script>
 <script src="{{ URL('assets/js/jquery.js') }}"></script>
 
+
+
 <script>
 
 let x = document.getElementById('EnD').defaultValue = 0 ;

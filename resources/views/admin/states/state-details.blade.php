@@ -69,6 +69,7 @@
                             <th scope="col">Year</th>
                             <th scope="col">Quarter</th>
                             <th scope="col">Deliverable</th>
+                            <th scope="col">MoVs</th>
                             <th scope="col">Status</th>
                             <th scope="col">Achieved</th>
                         </tr>
@@ -80,6 +81,7 @@
                             <td>{{ $data->Year }}</td>
                             <td>{{ $data->quarter }}</td>
                             <td>{{ ucwords($data->Deliverable) }}</td>
+                            <td style="overflow-x: scroll;width:30%;height:30px;">{{ ucwords($data->MoVs) }}</td>
                             <td>{{ ucwords(config('app.status')[$data->status]) }}</td>
                             <td>{{ $data->acheived}}</td>
                         </tr>

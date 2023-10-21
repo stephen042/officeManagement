@@ -38,6 +38,7 @@
                             <th scope="col">Output</th>
                             <th scope="col">Indicator</th>
                             <th scope="col">Target</th>
+                            <!-- <th scope="col">MoVs</th> -->
                             <th scope="col">Date</th>
                             <th scope="col">Action</th>
                         </tr>

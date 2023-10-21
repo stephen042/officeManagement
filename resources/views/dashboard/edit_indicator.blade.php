@@ -43,19 +43,19 @@
         </div>
         <!-- End Page Title -->
         @if (session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <i class="bi bi-exclamation-octagon me-1"></i>
-                {{ session('error') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+            {{ session('error') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @endif
 
         @if (session()->has('message'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                <i class="bi bi-exclamation-octagon me-1"></i>
-                {{ session('message') }}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="bi bi-exclamation-octagon me-1"></i>
+            {{ session('message') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @endif
 
         <section class="section">
@@ -74,7 +74,7 @@
                                     <div class="col-sm-10">
                                         <input type="date" name="year" class="form-control">
                                         @error('date')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
 
@@ -91,7 +91,7 @@
                                             <option value="4">4</option>
                                         </select>
                                         @error('quarter')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
 
@@ -100,19 +100,18 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Deliverable</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="deliverable"
-                                            aria-label="Default select example">
+                                        <select class="form-select" name="deliverable" aria-label="Default select example">
                                             <option selected disabled>Select Deliverable</option>
                                             @forelse ($deliverableinfo as $list)
-                                                <option value="{{ $list->deliverable }}">{{ $list->deliverable }}
-                                                </option>
+                                            <option value="{{ $list->deliverable }}">{{ $list->deliverable }}
+                                            </option>
                                             @empty
-                                                <option value="No deliverable">No deliverable </option>
+                                            <option value="No deliverable">No deliverable </option>
                                             @endforelse
 
                                         </select>
                                         @error('deliverable')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
 
@@ -123,7 +122,47 @@
                                     <div class="col-sm-10">
                                         <input type="number" name="acheived" class="form-control">
                                         @error('achieved')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
+                                        @enderror
+                                    </div>
+
+                                </div>
+
+                                <div class="row mb-3">
+                                    <label class="col-sm-2 col-form-label">Means of verification ( MoVs)</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-select" name="MoVs[]" aria-label="Default select example" multiple>
+                                            <option selected disabled>MoVs</option>
+                                            <option value="Participant Feedback Surveys">Participant Feedback Surveys</option>
+                                            <option value="Pictures">Pictures</option>
+                                            <option value="Activity Report">Activity Report</option>
+                                            <option value="Pre- and Post-Event/Training Assessments">Pre- and Post-Event/Training Assessments</option>
+                                            <option value="Facilitator/Trainer Assessment">Facilitator/Trainer Assessment</option>
+                                            <option value="Post-Training Application or Follow-up">Post-Training Application or Follow-up</option>
+                                            <option value="Peer Review">Peer Review</option>
+                                            <option value="Case Studies">Case Studies</option>
+                                            <option value="Focus Group Discussion Reports">Focus Group Discussion Reports</option>
+                                            <option value="social media and Online Analytics">social media and Online Analytics</option>
+                                            <option value="Certification or Assessment Tests">Certification or Assessment Tests</option>
+                                            <option value="Stakeholder Interviews">Stakeholder Interviews</option>
+                                            <option value="Long-Term Impact Assessment">Long-Term Impact Assessment</option>
+                                            <option value="Action Plan developed">Action Plan developed </option>
+                                            <option value="Baseline Assessment Report">Baseline Assessment Report </option>
+                                            <option value="Midline Assessment report">Midline Assessment report </option>
+                                            <option value="Endline Assessment Report">Endline Assessment Report  </option>
+                                            <option value="Video Recording">Video Recording </option>
+                                            <option value="Voice Note">Voice Note</option>
+                                            <option value="Surveys and Questionnaires">Surveys and Questionnaires</option>
+                                            <option value="Key Informant Interviews">Key Informant Interviews</option>
+                                            <option value="Field Visits Report">Field Visits Report</option>
+                                            <option value="Statistical Analysis">Statistical Analysis</option>
+                                            <option value="Data Quality Assessments">Data Quality Assessments</option>
+                                            <option value="Beneficiary Feedback">Beneficiary Feedback</option>
+                                            <option value="Data Validation">Data Validation</option>
+                                            <option value="Documentation Review">Documentation Review</option>
+                                        </select>
+                                        @error('quarter')
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
 
@@ -152,8 +191,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Quarter</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="quarterpdf"
-                                            aria-label="Default select example" required>
+                                        <select class="form-select" name="quarterpdf" aria-label="Default select example" required>
                                             <option selected disabled>Select Quarter</option>
                                             <option value="1">1</option>
                                             <option value="2">2</option>
@@ -161,7 +199,7 @@
                                             <option value="4">4</option>
                                         </select>
                                         @error('quarterpdf')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
 
@@ -170,18 +208,17 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Year</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="yearpdf" aria-label="Default select example"
-                                            required>
+                                        <select class="form-select" name="yearpdf" aria-label="Default select example" required>
                                             <option selected disabled>Select Year</option>
                                             @forelse ($editinfodistinct as $list)
-                                                <option value="{{ $list->Year }}">{{ $list->Year }}</option>
+                                            <option value="{{ $list->Year }}">{{ $list->Year }}</option>
                                             @empty
-                                                <option selected disabled>No Data available </option>
+                                            <option selected disabled>No Data available </option>
                                             @endforelse
 
                                         </select>
                                         @error('yearpdf')
-                                            <p class="text-danger">{{ $message }} </p>
+                                        <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
                                 </div>
@@ -212,6 +249,7 @@
                                         <th scope="col">Quarter</th>
                                         <th scope="col">Deliverable</th>
                                         <th scope="col">Achieved</th>
+                                        <th scope="col">MoVs</th>
                                         <th scope="col">status</th>
                                         <th scope="col">Date/Time </th>
                                         {{-- <th scope="col">Total</th> --}}
@@ -221,44 +259,47 @@
                                 </thead>
                                 <tbody>
                                     @forelse ($editinfo as $info => $data)
-                                        <tr>
-                                            <th scope="row">{{ $info + 1 }}</th>
-                                            <td>
-                                                {{ $data->Year }}
-                                            </td>
-                                            <td>
-                                                {{ $data->quarter }}
-                                            </td>
-                                            <td>
-                                                {{ $data->Deliverable }}
-                                            </td>
-                                            <td>
-                                                {{ $data->acheived }}
-                                            </td>
+                                    <tr>
+                                        <th scope="row">{{ $info + 1 }}</th>
+                                        <td>
+                                            {{ $data->Year }}
+                                        </td>
+                                        <td>
+                                            {{ $data->quarter }}
+                                        </td>
+                                        <td>
+                                            {{ $data->Deliverable }}
+                                        </td>
+                                        <td>
+                                            {{ $data->acheived }}
+                                        </td>
+                                        <td>
+                                            {{ $data->MoVs }}
+                                        </td>
 
-                                            <td>
-                                                @if ($data->status == 1)
-                                                    <button disabled class="btn btn-warning"> Pending..</button>
-                                                @elseif ($data->status == 2)
-                                                    <button disabled class="btn btn-info"> Approved</button>
-                                                @endif
-                                            </td>
-                                            <td>
-                                                {{ date('d M, Y / h:i a', strtotime($data->created_at)) }}
-                                            </td>
+                                        <td>
+                                            @if ($data->status == 1)
+                                            <button disabled class="btn btn-warning"> Pending..</button>
+                                            @elseif ($data->status == 2)
+                                            <button disabled class="btn btn-info"> Approved</button>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ date('d M, Y / h:i a', strtotime($data->created_at)) }}
+                                        </td>
 
-                                        </tr>
+                                    </tr>
                                     @empty
-                                        <tr>
+                                    <tr>
 
-                                            <th scope="row"></th>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td class="d-flex justify-content-around">
-                                            </td>
-                                        </tr>
+                                        <th scope="row"></th>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="d-flex justify-content-around">
+                                        </td>
+                                    </tr>
                                     @endforelse
                                 </tbody>
                             </table>
@@ -279,7 +320,6 @@
     <!-- End Footer -->
 
     @include('dashboard.includes.script')
-
 </body>
 
 </html>

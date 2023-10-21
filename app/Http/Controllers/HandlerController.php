@@ -37,7 +37,7 @@ class HandlerController extends Controller
             Auth::loginUsingId($user->id);
             if ($user->role == 0) {
                 return redirect('/dashboard')->with('message', 'Welcome Back');
-            }elseif($user->role == 1){
+            } elseif ($user->role == 1) {
                 return redirect('/admin')->with('message', 'Welcome Back Admin');
             }
         } else {
@@ -51,7 +51,7 @@ class HandlerController extends Controller
 
             $stateid = Auth::user()->id;
 
-            $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->orderBy('id','DESC')->get();
+            $outputTableinfo = outputTable::where("stateid", "=", "{$stateid}")->orderBy('id', 'DESC')->get();
             // dd($outputTable);
             return view("dashboard.index", [
                 'outputTable' => $outputTableinfo
@@ -74,21 +74,21 @@ class HandlerController extends Controller
 
             // to get the table data of acheived data
             $editinfo = deliverableTbale::where("outputid", "=", "{$id}")
-            ->where("stateid", "=", "{$outputinfo->stateid}")
-            ->orderBy('id','DESC')
-            ->get();
+                ->where("stateid", "=", "{$outputinfo->stateid}")
+                ->orderBy('id', 'DESC')
+                ->get();
 
             // for getting year distinct 
             $editinfodistinct = deliverableTbale::where("outputid", "=", "{$id}")
-            ->where("stateid", "=", "{$outputinfo->stateid}")
-            ->select('Year')
-            ->groupBy('Year')
-            ->get();
+                ->where("stateid", "=", "{$outputinfo->stateid}")
+                ->select('Year')
+                ->groupBy('Year')
+                ->get();
 
             // to get the deliverable associated to the current output
             $deliverableinfo = deliverable_table::where("outputid", "=", "{$id}")
-            ->where("stateid", "=", "{$outputinfo->stateid}")
-            ->get();
+                ->where("stateid", "=", "{$outputinfo->stateid}")
+                ->get();
 
             // dd($editinfo);
             return view("dashboard.edit_indicator", [
@@ -105,22 +105,26 @@ class HandlerController extends Controller
         $outputinfo = outputTable::where("id", "=", "{$id}")->get()->first();
 
         // to get state
-        $state  = User::where("id","=","$outputinfo->stateid")->get()->first(); 
+        $state  = User::where("id", "=", "$outputinfo->stateid")->get()->first();
         // to validate the data
         $request->validate([
             "year" => "required",
             "quarter" => "required",
-            // "deliverable" => "required",
+            "MoVs" => "required",
             "acheived" => "required"
         ]);
 
         $year = date('Y', strtotime($data->year));
+        // converting output to string so database can accept
+        $data->MoVs = implode(", ", $data->MoVs);
+
         // inserting into the deliverable_Table
         $result = deliverableTbale::insert([
             "Year" => "$year",
             "quarter" => "$data->quarter",
             "Deliverable" => "$data->deliverable",
             "acheived" => "$data->acheived",
+            "MoVs"      => "$data->MoVs",
             "outputid" => "$id",
             "stateid" => "$outputinfo->stateid",
             "state" => "$state->state",
@@ -149,7 +153,7 @@ class HandlerController extends Controller
 
         // to collect the current output datas
         $outputinfo = outputTable::where("id", "=", "{$data->idpdf}")->get()->first();
-        $user = user::where("id","=","$outputinfo->stateid")->get()->first();
+        $user = user::where("id", "=", "$outputinfo->stateid")->get()->first();
 
         $editinfo = deliverableTbale::where("outputid", "=", "{$data->idpdf}")
             ->where("stateid", "=", "{$outputinfo->stateid}")
@@ -157,35 +161,36 @@ class HandlerController extends Controller
             ->where("quarter", "=", "{$data->quarterpdf}")
             ->get();
 
-            $sum_of_achieved = deliverableTbale::where("outputid", "=", "{$data->idpdf}")
+        $sum_of_achieved = deliverableTbale::where("outputid", "=", "{$data->idpdf}")
             ->where("stateid", "=", "{$outputinfo->stateid}")
             ->where("Year", "=", "{$data->yearpdf}")
             ->where("quarter", "=", "{$data->quarterpdf}")
-            ->where("status","=","2")
+            ->where("status", "=", "2")
             ->sum('acheived');
-             
-            // dd($sum_of_achieved);
-            // $sum_of_achieved = $sum_of_achieved_get->sum('acheived');
-            $date = Carbon::now()->format('Y-m-d-H-i-a');
+
+        // dd($sum_of_achieved);
+        // $sum_of_achieved = $sum_of_achieved_get->sum('acheived');
+        $date = Carbon::now()->format('Y-m-d-H-i-a');
 
         $pdf = Pdf::loadView('invoice', [
             'outputinfo' => $outputinfo,
             'editinfo' => $editinfo,
             'sum_achieved' => $sum_of_achieved,
         ]);
-        return $pdf->download($user->state.'_report'.$date.'.pdf');
+        return $pdf->download($user->state . '_report' . $date . '.pdf');
     }
 
-    public function event(Request $request){
+    public function event(Request $request)
+    {
         if ($request->method() == "GET") {
 
             $state_id = Auth::user()->id;
             $location_bene = event_loc_bene::whereNotNull('location_of_training')
-            ->whereNotNull('target_bene')
-            ->get();
+                ->whereNotNull('target_bene')
+                ->get();
 
-            return view('dashboard.event.index',[
-                "eventdata" => Event_tb::where("state_id","=","$state_id")->get(),
+            return view('dashboard.event.index', [
+                "eventdata" => Event_tb::where("state_id", "=", "$state_id")->get(),
                 "location_bene" => $location_bene,
             ]);
         }
@@ -210,19 +215,23 @@ class HandlerController extends Controller
             "p_pwd_female" => "required|numeric",
             "p_total" => "required|numeric",
             "activity_code" => "required",
+            "MoVs" => "required",
             "indicator_no" => "required",
             "indicator" => "required",
-        ]); 
+        ]);
 
 
 
         $validated['state_id'] = Auth::user()->id;
-        $validated['year'] = date("Y",strtotime($validated['year']));
+        $validated['year'] = date("Y", strtotime($validated['year']));
+
         // converting output to string so database can accept
-        $validated['output'] = implode(", ",$validated['output']);
-        
+        $validated['output'] = implode(", ", $validated['output']);
+        // converting output to string so database can accept
+        $validated['MoVs'] = implode(", ", $validated['MoVs']);
+
         // to get the output number
-        $indicator = outputTable::where("indicator","=","{$validated['indicator']}")->get()->first();
+        $indicator = outputTable::where("indicator", "=", "{$validated['indicator']}")->get()->first();
 
         $validated['indicator_no'] = $indicator->output;
 
@@ -231,12 +240,12 @@ class HandlerController extends Controller
         if ($validated) {
             Event_tb::create($validated);
 
-            return back()->with('message','Record Created Successfully');
-        }else {
-            return back()->with('error','error :)Record was not created ');
+            return back()->with('message', 'Record Created Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not created ');
         }
 
-        return back()->with('error','Record was not created ');
+        return back()->with('error', 'Record was not created ');
     }
 
     // public function state_csv(Request $request){
@@ -244,15 +253,16 @@ class HandlerController extends Controller
     //     return Excel::download( new stateEvent , 'stateEvent-record-'.$date.'.csv');
     // }
 
-    public function edit_event(Request $request, Event_tb $event_tb){
+    public function edit_event(Request $request, Event_tb $event_tb)
+    {
 
         if ($request->method() == "GET") {
-            
+
             // converting output to array
             // $output_data = explode(",",$event_tb->output);
             $location_bene = event_loc_bene::get();
             // dd($location_bene);
-            return view("dashboard.event.edit_event",[
+            return view("dashboard.event.edit_event", [
                 // "output_data" => $output_data,
                 "event_tb" => $event_tb,
                 "location_bene" => $location_bene,
@@ -266,18 +276,18 @@ class HandlerController extends Controller
             "indicator_no" => "required",
             "indicator" => "required",
         ]);
-                
+
         $update = $request->all();
-        
-        $update['output'] =  implode(", ",$update['output']);
+
+        $update['output'] =  implode(", ", $update['output']);
         $update['indicator_no'] = (float) $update['indicator_no'];
         // dd($update);
 
         $result = $event_tb->update($update);
         if ($result) {
-            return back()->with('message','Record updated Successfully');
-        }else {
-            return back()->with('error','error :)Record was not updated ');
+            return back()->with('message', 'Record updated Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not updated ');
         }
     }
 
