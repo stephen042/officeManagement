@@ -76,6 +76,7 @@
                     <th> PWD Female</th>
                     <th> Total</th>
                     <th> Activity Code</th>
+                    <th> MoVs</th>
                     <th> Indicator Number</th>
                     <th> Indicator</th>
                 </tr>
@@ -138,6 +139,9 @@
                     </td>
                     <td>
                         {{ $data->activity_code }}
+                    </td>
+                    <td>
+                        {{ $data->MoVs }}
                     </td>
                     <td>
                         {{ $data->indicator_no }}

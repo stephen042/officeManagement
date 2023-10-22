@@ -32,6 +32,7 @@ class EventExport implements FromCollection, WithHeadings
             'p_pwd_female',
             'p_total',
             'activity_code',
+            'MoVs',
             'indicator_no',
             'indicator',
         ]);
@@ -56,6 +57,7 @@ class EventExport implements FromCollection, WithHeadings
             'PWD Female',
             'Total',
             'Activity Code',
+            'MoVs',
             'Indicator Number',
             'Indicator',
         ];

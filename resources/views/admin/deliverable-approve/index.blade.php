@@ -47,6 +47,7 @@
                             <th scope="col">Quarter</th>
                             <th scope="col">Deliverable</th>
                             <th scope="col">Achieved</th>
+                            <th scope="col">MoVs</th>
                             <th scope="col">status</th>
                             <th scope="col">Date</th>
                             <th scope="col">Action</th>
@@ -72,6 +73,9 @@
                                 </td>
                                 <td>
                                     {{ $data->acheived }}
+                                </td>
+                                <td>
+                                    {{ $data->MoVs }}
                                 </td>
                                 <td>
                                     <input type="button" 
@@ -132,6 +136,7 @@
                             <th scope="col">Quarter</th>
                             <th scope="col">Deliverable</th>
                             <th scope="col">Achieved</th>
+                            <th scope="col">MoVs</th>
                             <th scope="col">status</th>
                             <th scope="col">Date</th>
                             {{-- <th scope="col">Action</th> --}}
@@ -157,6 +162,9 @@
                                 </td>
                                 <td>
                                     {{ $data->acheived }}
+                                </td>
+                                <td>
+                                    {{ $data->MoVs }}
                                 </td>
                                 <td>
                                     {{ config('app.status')[$data->status] }}

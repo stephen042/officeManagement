@@ -216,6 +216,7 @@
                                         <th scope="col"> PWD Female</th>
                                         <th scope="col"> Total</th>
                                         <th scope="col"> Activity Code</th>
+                                        <th scope="col"> MoVs</th>
                                         <th scope="col"> Indicator Number</th>
                                         <th scope="col"> Indicator</th>
                                         <th scope="col"> Edit</th>
@@ -279,6 +280,9 @@
                                         </td>
                                         <td>
                                             {{ $data->activity_code }}
+                                        </td>
+                                        <td>
+                                            {{ $data->MoVs }}
                                         </td>
                                         <td>
                                             {{ $data->indicator_no }}

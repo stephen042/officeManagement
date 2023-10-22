@@ -64,6 +64,7 @@
                 <th>Quarter</th>
                 <th>Deliverable</th>
                 <th>Achieved</th>
+                <th>MoVs</th>
                 <th>status</th>
                 <th>Date</th>
             </tr>
@@ -77,6 +78,7 @@
                     <td>{{ $data->quarter }} </td>
                     <td>{{ $data->Deliverable }}</td>
                     <td>{{ $data->acheived }}</td>
+                    <td>{{ $data->MoVs }}</td>
                     <td>
                         @if ($data->status == 1)
                             Pending..
