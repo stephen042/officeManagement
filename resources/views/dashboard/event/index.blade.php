@@ -293,7 +293,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Means of verification ( MoVs)</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="MoVs[]" aria-label="Default select example" multiple>
+                                        <select class="form-select" required name="MoVs[]" aria-label="Default select example" multiple>
                                             <option selected disabled>MoVs</option>
                                             <option value="Participant Feedback Surveys">Participant Feedback Surveys</option>
                                             <option value="Pictures">Pictures</option>
