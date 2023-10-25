@@ -161,7 +161,7 @@
                                             <option value="Data Validation">Data Validation</option>
                                             <option value="Documentation Review">Documentation Review</option>
                                         </select>
-                                        @error('quarter')
+                                        @error('MoVs')
                                         <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
