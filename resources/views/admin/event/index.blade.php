@@ -86,7 +86,7 @@
         <hr>
         <div class="card">
             <div class="card-body" style="overflow:auto;">
-                <h5 class="card-title">List Of Indicator</h5>
+                <h5 class="card-title">List Of Locations and Beneficiaries</h5>
                 <!-- Table with stripped rows -->
                 <table class="table datatable">
                     <thead>
@@ -212,8 +212,7 @@
                                         <th scope="col"> End Date</th>
                                         <th scope="col"> Female</th>
                                         <th scope="col"> Male</th>
-                                        <th scope="col"> PWD Male</th>
-                                        <th scope="col"> PWD Female</th>
+                                        <th scope="col"> PWD</th>
                                         <th scope="col"> Total</th>
                                         <th scope="col"> Activity Code</th>
                                         <th scope="col"> MoVs</th>
@@ -270,10 +269,7 @@
                                             {{ $data->p_male }}
                                         </td>
                                         <td>
-                                            {{ $data->p_pwd_male }}
-                                        </td>
-                                        <td>
-                                            {{ $data->p_pwd_female }}
+                                            {{ $data->pwd }}
                                         </td>
                                         <td>
                                             {{ $data->p_total }}

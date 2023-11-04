@@ -23,15 +23,11 @@ let y = document.getElementById('AnD').defaultValue = 0 ;
 
 let v1 = document.getElementById('PF').defaultValue = 0 ;
 let v2 = document.getElementById('PM').defaultValue = 0 ;
-let v3 = document.getElementById('PDW_PF').defaultValue = 0 ;
-let v4 = document.getElementById('PDW_PM').defaultValue = 0 ;
 function popup() {
 var value1 = Number(document.getElementById('PF').value);
 var value2 = Number(document.getElementById('PM').value);
-var value3 = Number(document.getElementById('PDW_PF').value);
-var value4 = Number(document.getElementById('PDW_PM').value);
 
-var total = value1 + value2 + value3 + value4;
+var total = value1 + value2;
 document.getElementById('total').value = total;
 } 
 </script>

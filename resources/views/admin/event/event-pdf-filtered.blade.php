@@ -72,8 +72,7 @@
                     <th> End Date</th>
                     <th> Female</th>
                     <th> Male</th>
-                    <th> PWD Male</th>
-                    <th> PWD Female</th>
+                    <th> PWD </th>
                     <th> Total</th>
                     <th> Activity Code</th>
                     <th> Indicator Number</th>
@@ -128,10 +127,7 @@
                         {{ $data->p_male }}
                     </td>
                     <td>
-                        {{ $data->p_pwd_male }}
-                    </td>
-                    <td>
-                        {{ $data->p_pwd_female }}
+                        {{ $data->pwd }}
                     </td>
                     <td>
                         {{ $data->p_total }}

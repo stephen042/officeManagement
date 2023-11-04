@@ -123,7 +123,7 @@
                                     <div class="col-sm-10">
                                         <select class="form-select" name="location_of_training" aria-label="Default select example">
                                             <option selected disabled>Select location</option>
-                                            @foreach ($location_bene as $data )
+                                            @foreach ($location as $data )
                                             <option value="{{ $data->location_of_training }}" {{ old("location_of_training") == $data->location_of_training ? "selected":""  }}>
                                                 {{ $data->location_of_training }}
                                             </option>
@@ -139,9 +139,9 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Target Beneficiaries</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="target_bene" aria-label="Default select example">
+                                        <select class="form-select" name="target_bene" aria-label="Default select example" multiple>
                                             <option selected disabled>Select Target Beneficiaries</option>
-                                            @foreach ($location_bene as $data )
+                                            @foreach ($bene as $data )
                                             <option value="{{ $data->target_bene }}" {{ old("target_bene") == $data->target_bene ? "selected":""  }}>
                                                 {{$data->target_bene}}
                                             </option>
@@ -225,7 +225,9 @@
                                 <hr>
                                 <div class="row mb-3">
 
-                                    <label class="col-sm-2 col-form-label fs-5" style="font-weight: bold">Participants</label>
+                                    <label class="col-sm-2 col-form-label fs-5" style="font-weight: bold">Participants
+                            </label>
+                            <label class="alert alert-info"> The List of Participants does not encompass PLANE staff</label>
 
                                 </div>
                                 <div class="row mb-3">
@@ -251,20 +253,10 @@
                                 <hr>
                                 <label for="inputText" class="col-sm-2 col-form-label fs-7 text-primary" style="font-weight: bold">PWD</label>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Male</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">PWD total</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="number" value="{{ old('p_pwd_male') }}" id="PDW_PM" onkeyup="popup()" name="p_pwd_male" class="form-control count ">
-                                        @error('p_pwd_male')
-                                        <p class="text-danger">{{ $message }} </p>
-                                        @enderror
-                                    </div>
-
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Female</label>
-                                    <div class="col-sm-10 my-3">
-                                        <input type="number" value="{{ old('p_pwd_female') }}" id="PDW_PF" onkeyup="popup()" name="p_pwd_female" class="form-control count ">
-                                        @error('p_pwd_female')
+                                        <input type="number" value="{{ old('pwd') }}" id="PDW_PM" name="pwd" class="form-control count ">
+                                        @error('pwd')
                                         <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
@@ -373,8 +365,7 @@
                                         <th scope="col"> End Date</th>
                                         <th scope="col"> Female</th>
                                         <th scope="col"> Male</th>
-                                        <th scope="col"> PWD Male</th>
-                                        <th scope="col"> PWD Female</th>
+                                        <th scope="col"> PWD</th>
                                         <th scope="col"> Total</th>
                                         <th scope="col"> Activity Code</th>
                                         <th scope="col"> Indicator Number</th>
@@ -431,10 +422,7 @@
                                             {{ $data->p_male }}
                                         </td>
                                         <td>
-                                            {{ $data->p_pwd_male }}
-                                        </td>
-                                        <td>
-                                            {{ $data->p_pwd_female }}
+                                            {{ $data->pwd }}
                                         </td>
                                         <td>
                                             {{ $data->p_total }}

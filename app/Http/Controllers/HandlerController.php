@@ -185,13 +185,15 @@ class HandlerController extends Controller
         if ($request->method() == "GET") {
 
             $state_id = Auth::user()->id;
-            $location_bene = event_loc_bene::whereNotNull('location_of_training')
-                ->whereNotNull('target_bene')
+            $location = event_loc_bene::whereNotNull('location_of_training')
+                ->get();
+            $bene = event_loc_bene::whereNotNull('target_bene')
                 ->get();
 
             return view('dashboard.event.index', [
-                "eventdata" => Event_tb::where("state_id", "=", "$state_id")->get(),
-                "location_bene" => $location_bene,
+                "eventdata" => Event_tb::where("state_id", "=", "$state_id")->orderBy('id', 'DESC')->get(),
+                "location" => $location,
+                "bene" => $bene,
             ]);
         }
 
@@ -211,8 +213,7 @@ class HandlerController extends Controller
             "end_date" => "required",
             "p_female" => "required|numeric",
             "p_male" => "required|numeric",
-            "p_pwd_male" => "required|numeric",
-            "p_pwd_female" => "required|numeric",
+            "pwd" => "required|numeric",
             "p_total" => "required|numeric",
             "activity_code" => "required",
             "MoVs" => "required",
@@ -260,12 +261,16 @@ class HandlerController extends Controller
 
             // converting output to array
             // $output_data = explode(",",$event_tb->output);
-            $location_bene = event_loc_bene::get();
+            $location = event_loc_bene::whereNotNull('location_of_training')
+                ->get();
+            $bene = event_loc_bene::whereNotNull('target_bene')
+                ->get();
             // dd($location_bene);
             return view("dashboard.event.edit_event", [
                 // "output_data" => $output_data,
                 "event_tb" => $event_tb,
-                "location_bene" => $location_bene,
+                "location" => $location,
+                "bene" => $bene,
             ]);
         }
 

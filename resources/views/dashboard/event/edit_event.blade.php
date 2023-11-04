@@ -118,7 +118,7 @@
                                         <select class="form-select" name="location_of_training" aria-label="Default select example" required>
 
                                             <option selected disabled>Select location</option>
-                                            @foreach ($location_bene as $data )
+                                            @foreach ($location as $data )
                                             <option value="{{ $data->location_of_training }}">
                                                 {{$data->location_of_training}}
                                             </option>
@@ -138,9 +138,9 @@
                                         <span class="text-danger"><small>select new value or select the default value below</small></span>
                                         <input type="text" disabled class="form-control" value="{{ $event_tb->target_bene}}">
 
-                                        <select class="form-select" name="target_bene" aria-label="Default select example" required>
+                                        <select class="form-select" name="target_bene" aria-label="Default select example" required multiple>
                                             <option selected disabled>Select Target Beneficiaries</option>
-                                            @foreach ($location_bene as $data1 )
+                                            @foreach ($bene as $data1 )
                                             <option value="{{ $data1->target_bene }}">
                                                 {{ $data1->target_bene }}
                                             </option>

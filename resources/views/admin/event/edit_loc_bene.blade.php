@@ -53,7 +53,7 @@
                     <div class="row mb-3">
                         <label for="inputEmail3" class="col-sm-2 col-form-label">Target Beneficiaries</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="inputEmail" name="target_bene" placeholder="Password" value="{{ $location_bene->target_bene }}">
+                            <input type="text" class="form-control" id="inputEmail" name="target_bene" placeholder="Target Beneficiaries" value="{{ $location_bene->target_bene }}">
                         </div>
                     </div>
                     <div class="text-center">
