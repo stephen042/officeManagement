@@ -228,6 +228,10 @@ class HandlerController extends Controller
 
         // converting output to string so database can accept
         $validated['output'] = implode(", ", $validated['output']);
+
+        // converting target_bene to string so database can accept
+        $validated['target_bene'] = implode(", ", $validated['target_bene']);
+
         // converting output to string so database can accept
         $validated['MoVs'] = implode(", ", $validated['MoVs']);
 
@@ -285,6 +289,7 @@ class HandlerController extends Controller
         $update = $request->all();
 
         $update['output'] =  implode(", ", $update['output']);
+        $update['target_bene'] =  implode(", ", $update['target_bene']);
         $update['indicator_no'] = (float) $update['indicator_no'];
         // dd($update);
 

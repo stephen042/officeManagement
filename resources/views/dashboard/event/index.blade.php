@@ -139,7 +139,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-form-label">Target Beneficiaries</label>
                                     <div class="col-sm-10">
-                                        <select class="form-select" name="target_bene" aria-label="Default select example" multiple>
+                                        <select class="form-select" name="target_bene[]" aria-label="Default select example" multiple>
                                             <option selected disabled>Select Target Beneficiaries</option>
                                             @foreach ($bene as $data )
                                             <option value="{{ $data->target_bene }}" {{ old("target_bene") == $data->target_bene ? "selected":""  }}>

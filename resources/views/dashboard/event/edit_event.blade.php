@@ -138,7 +138,7 @@
                                         <span class="text-danger"><small>select new value or select the default value below</small></span>
                                         <input type="text" disabled class="form-control" value="{{ $event_tb->target_bene}}">
 
-                                        <select class="form-select" name="target_bene" aria-label="Default select example" required multiple>
+                                        <select class="form-select" name="target_bene[]" aria-label="Default select example" required multiple>
                                             <option selected disabled>Select Target Beneficiaries</option>
                                             @foreach ($bene as $data1 )
                                             <option value="{{ $data1->target_bene }}">
@@ -216,6 +216,7 @@
                                 <div class="row mb-3">
 
                                     <label class="col-sm-2 col-form-label fs-5" style="font-weight: bold">Participants</label>
+                                    <label class="alert alert-info"> The List of Participants does not encompass PLANE staff</label>
 
                                 </div>
                                 <div class="row mb-3">
@@ -235,16 +236,9 @@
                                 <hr>
                                 <label for="inputText" class="col-sm-2 col-form-label fs-7 text-primary" style="font-weight: bold">PWD</label>
                                 <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Male</label>
+                                    <label for="inputText" class="col-sm-2 col-form-label">PWD total</label>
                                     <div class="col-sm-10 my-3">
-                                        <input type="number" id="PDW_PM" value="{{$event_tb->p_pwd_male}}" onkeyup="popup()" name="p_pwd_male" class="form-control count ">
-                                    </div>
-
-                                </div>
-                                <div class="row mb-3">
-                                    <label for="inputText" class="col-sm-2 col-form-label">Female</label>
-                                    <div class="col-sm-10 my-3">
-                                        <input type="number" id="PDW_PF" value="{{$event_tb->p_pwd_female}}" onkeyup="popup()" name="p_pwd_female" class="form-control count ">
+                                        <input type="number" value="{{$event_tb->pwd}}" name="pwd" class="form-control count ">
                                     </div>
 
                                 </div>
