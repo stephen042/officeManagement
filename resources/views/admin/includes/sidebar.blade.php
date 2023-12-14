@@ -40,7 +40,7 @@
     <li class="nav-item">
       <a class="nav-link collapsed" href="{{ route('admin_stakeholderEngagementTracker') }}">
         <i class="bi bi-people fs-4 "></i>
-        <span>Stake Holder Engagement Tracker</span>
+        <span>Stakeholder Engagement Tracker</span>
       </a>
     </li>
     <li class="nav-item">
