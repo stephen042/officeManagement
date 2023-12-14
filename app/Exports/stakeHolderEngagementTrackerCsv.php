@@ -3,9 +3,10 @@
 namespace App\Exports;
 
 use App\Models\stakeHolderEngagementTracker;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class stakeHolderEngagementTrackerCsv implements FromCollection
+class stakeHolderEngagementTrackerCsv implements FromCollection, WithHeadings
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -32,8 +33,9 @@ class stakeHolderEngagementTrackerCsv implements FromCollection
         return 
         [   'Date of interaction',
             'State',
-            'Programme Year',
-            'Output',
+            'Programme Year From',
+            'Programme Year To',
+            'Quarter',
             'Type of Stakeholders',
             'Designation of Stakeholders',
             'Output',
