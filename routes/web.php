@@ -97,7 +97,7 @@ Route::prefix('admin')->group(function () {
 
     // stakeolderEngagementTracker
     Route::prefix('/stakeholderEngagementTracker')->group(function () {
-        Route::get('/', [AdminController::class, "stakeholderEngagementTracker"])->middleware('auth')->name('stakeholderEngagementTracker');
+        Route::get('/', [AdminController::class, "stakeholderEngagementTracker"])->middleware('auth')->name('admin_stakeholderEngagementTracker');
         Route::get('/stakeHolderEngagementTracker_csv', [AdminController::class, 'stakeHolderEngagementTracker_csv'])->middleware('auth')->name('stakeHolderEngagementTracker_csv');
         Route::delete('/{stakeHolderEngagementTracker}', [AdminController::class, "delete_stakeholderEngagementTracker"])->middleware('auth')->name('delete-stakeholderEngagementTracker');
     });
