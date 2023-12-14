@@ -15,12 +15,12 @@
         </a>
       </li>
 
-      {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="">
-          <i class="bi bi-person"></i>
-          <span>Create New Record</span>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ route('stakeholderEngagementTracker') }}">
+          <i class="bi bi-people fs-4 "></i>
+          <span class="text-wrap">Stake Holder Engagement Tracker</span>
         </a>
-      </li> --}}
+      </li> 
       <hr>
       <li class="nav-item">
         <form action="{{ route('logout') }}" method="post">

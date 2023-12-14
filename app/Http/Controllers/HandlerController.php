@@ -12,6 +12,7 @@ use App\Models\event_loc_bene;
 use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
+use App\Models\stakeHolderEngagementTracker;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
@@ -294,6 +295,96 @@ class HandlerController extends Controller
         // dd($update);
 
         $result = $event_tb->update($update);
+        if ($result) {
+            return back()->with('message', 'Record updated Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not updated ');
+        }
+    }
+
+    // stakeholderEngagementTracker
+    public function stakeholderEngagementTracker(Request $request)
+    {
+        if ($request->method() == "GET") {
+            
+            $stateData = User::where('role','0')->get(['state']);
+            return view('dashboard.stakeHolderEngagementTracker.index',[
+                "stateData" => $stateData,
+                "tableDatas" => stakeHolderEngagementTracker::orderBy('id', 'DESC')->get(),
+            ]);
+        }
+
+        $validated = $request->validate([
+            "state" => "required",
+            "Date_of_interaction" => "required",
+            "output" => "required",
+            "quarter" => "required",
+            "Type_of_Stakeholders" => "required",
+            "Designation_of_Stakeholders" => "required",
+            "Programme_Year_From" => "required",
+            "Programme_Year_To" => "required",
+            "Date_Action_Taken" => "required",
+            "Plane_Theme" => "required",
+            "Resolution_reached" => "required",
+            "Action_taken_on_Resolution" => "required",
+        ]);
+    
+        $validated = $request->all();
+        
+        // converting output to string so database can accept
+        $validated['output'] = implode(", ", $validated['output']);
+
+        if ($validated['Action_taken_on_Resolution'] == "No") {
+            $validated['Date_Action_Taken'] = null;
+        }else{
+            $validated['Action_taken_on_Resolution'];
+        }
+
+        if ($validated) {
+            stakeHolderEngagementTracker::create($validated);
+
+            return back()->with('message', 'Record Created Successfully');
+        } else {
+            return back()->with('error', 'error :)Record was not created ');
+        }
+
+        return back()->with('error', 'Record was not created ');
+
+    }
+
+    public function Edit_stakeholderEngagementTracker (Request $request, stakeHolderEngagementTracker $stakeHolderEngagementTracker )
+    {
+        if ($request->method() == "GET") {
+
+            return view('dashboard.stakeHolderEngagementTracker.edit',[
+                "data" => $stakeHolderEngagementTracker,
+            ]);
+        }
+
+        $request->validate([
+            "Date_of_interaction" => "required",
+            "output" => "required",
+            "quarter" => "required",
+            "Type_of_Stakeholders" => "required",
+            "Designation_of_Stakeholders" => "required",
+            "Programme_Year_From" => "required",
+            "Programme_Year_To" => "required",
+            "Date_Action_Taken" => "required",
+            "Plane_Theme" => "required",
+            "Resolution_reached" => "required",
+            "Action_taken_on_Resolution" => "required",
+        ]);
+
+        $update = $request->all();
+        
+        $update['output'] =  implode(", ", $update['output']);
+
+        if ($update['Action_taken_on_Resolution'] == "No") {
+            $update['Date_Action_Taken'] = null;
+        }else{
+            $update['Action_taken_on_Resolution'];
+        }
+        $result = $stakeHolderEngagementTracker->update($update);
         if ($result) {
             return back()->with('message', 'Record updated Successfully');
         } else {

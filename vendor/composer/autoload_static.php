@@ -589,6 +589,8 @@ class ComposerStaticInit66ebbec411f6d543055482dd3048457c
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Exports\\EventExport' => __DIR__ . '/../..' . '/app/Exports/EventExport.php',
+        'App\\Exports\\stateEvent' => __DIR__ . '/../..' . '/app/Exports/stateEvent.php',
         'App\\Http\\Controllers\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdminController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\HandlerController' => __DIR__ . '/../..' . '/app/Http/Controllers/HandlerController.php',
@@ -609,6 +611,7 @@ class ComposerStaticInit66ebbec411f6d543055482dd3048457c
         'App\\Models\\deliverable_table' => __DIR__ . '/../..' . '/app/Models/deliverable_table.php',
         'App\\Models\\event_loc_bene' => __DIR__ . '/../..' . '/app/Models/event_loc_bene.php',
         'App\\Models\\outputTable' => __DIR__ . '/../..' . '/app/Models/outputTable.php',
+        'App\\Models\\stakeHolderEngagementTracker' => __DIR__ . '/../..' . '/app/Models/stakeHolderEngagementTracker.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',

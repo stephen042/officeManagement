@@ -17,19 +17,19 @@
 
 
 <script>
+    let x = document.getElementById('EnD').defaultValue = 0;
+    let y = document.getElementById('AnD').defaultValue = 0;
 
-let x = document.getElementById('EnD').defaultValue = 0 ;
-let y = document.getElementById('AnD').defaultValue = 0 ;
+    let v1 = document.getElementById('PF').defaultValue = 0;
+    let v2 = document.getElementById('PM').defaultValue = 0;
 
-let v1 = document.getElementById('PF').defaultValue = 0 ;
-let v2 = document.getElementById('PM').defaultValue = 0 ;
-function popup() {
-var value1 = Number(document.getElementById('PF').value);
-var value2 = Number(document.getElementById('PM').value);
+    function popup() {
+        var value1 = Number(document.getElementById('PF').value);
+        var value2 = Number(document.getElementById('PM').value);
 
-var total = value1 + value2;
-document.getElementById('total').value = total;
-} 
+        var total = value1 + value2;
+        document.getElementById('total').value = total;
+    }
 </script>
 
 @livewireScripts()

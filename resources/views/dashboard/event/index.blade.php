@@ -27,7 +27,7 @@
                     <li class="breadcrumb-item active">Data</li>
                 </ol>
             </nav>
-            <button class="btn btn-primary" onclick="window.location.href='{{ route('dashboard') }}'"> Back</button>
+            <button class="btn btn-primary" onclick="window.location.href='/dashboard'"> Back</button>
         </div>
 
         <!-- End Page Title -->
@@ -106,16 +106,15 @@
                                     <div class="col-sm-10">
                                         <select class="form-control choices-multiple" id="select" name="output[]" data-placeholder="choose output" multiple="multiple">
                                             <option selected disabled>Select Output</option>
-                                            <option value="output1" {{ old("output1") == "Workshop"? "selected":""  }}>output1</option>
-                                            <option value="output2" {{ old("output2") == "Workshop"? "selected":""  }}>output2</option>
-                                            <option value="output3" {{ old("output3") == "Workshop"? "selected":""  }}>output3</option>
-                                            <option value="output4" {{ old("output4") == "Workshop"? "selected":""  }}>output4</option>
+                                            <option value="output1" {{ old("output[]") == "output1"? "selected":""  }}>output1</option>
+                                            <option value="output2" {{ old("output[]") == "output2"? "selected":""  }}>output2</option>
+                                            <option value="output3" {{ old("output[]") == "output3"? "selected":""  }}>output3</option>
+                                            <option value="output4" {{ old("output[]") == "output4"? "selected":""  }}>output4</option>
                                         </select>
-                                        @error('output')
+                                        @error('output[]')
                                         <p class="text-danger">{{ $message }} </p>
                                         @enderror
                                     </div>
-
                                 </div>
 
                                 <div class="row mb-3">

@@ -8,6 +8,8 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Exports\\EventExport' => $baseDir . '/app/Exports/EventExport.php',
+    'App\\Exports\\stateEvent' => $baseDir . '/app/Exports/stateEvent.php',
     'App\\Http\\Controllers\\AdminController' => $baseDir . '/app/Http/Controllers/AdminController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\HandlerController' => $baseDir . '/app/Http/Controllers/HandlerController.php',
@@ -28,6 +30,7 @@ return array(
     'App\\Models\\deliverable_table' => $baseDir . '/app/Models/deliverable_table.php',
     'App\\Models\\event_loc_bene' => $baseDir . '/app/Models/event_loc_bene.php',
     'App\\Models\\outputTable' => $baseDir . '/app/Models/outputTable.php',
+    'App\\Models\\stakeHolderEngagementTracker' => $baseDir . '/app/Models/stakeHolderEngagementTracker.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

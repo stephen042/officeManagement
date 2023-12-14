@@ -13,6 +13,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\stakeHolderEngagementTracker;
 // use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
@@ -497,4 +498,28 @@ class AdminController extends Controller
 
         return redirect()->route('admin_event')->with('error', 'Record Deleted successfully :)');
     }
+
+    public function stakeHolderEngagementTracker_csv() {
+        $date = Carbon::now()->format('Y-m-d-H-i-a');
+        return Excel::download( new stakeHolderEngagementTracker , 'stakeHolderEngagementTracker-'.$date.'.csv');
+    }
+
+    public function stakeholderEngagementTracker(Request $request)
+    {
+        if ($request->method() == "GET") {
+
+            return view('admin.stakeHolderEngagementTracker.index', [
+                "tableDatas" => stakeHolderEngagementTracker::orderBy('id', 'DESC')->get(),
+            ]);
+        }
+    }
+
+    public function delete_stakeholderEngagementTracker(stakeHolderEngagementTracker $stakeHolderEngagementTracker) {
+        
+        $stakeHolderEngagementTracker->delete();
+
+        // i used error so the message will be danger in color
+        return back()->with('error', 'Record Deleted successfully :)');
+    }
+
 }
