@@ -95,10 +95,10 @@ Route::prefix('admin')->group(function () {
     Route::post('/event/edit/{event_loc_bene}', [AdminController::class, 'location_bene'])->middleware('auth')->name('location_bene_post');
     Route::delete('/event/edit/{event_loc_bene}', [AdminController::class, 'location_bene_delete'])->middleware('auth')->name('location_bene_delete');
 
-    Route::get('/stakeHolderEngagementTracker_csv', [AdminController::class, 'stakeHolderEngagementTracker_csv'])->middleware('auth')->name('stakeHolderEngagementTracker_csv');
     // stakeolderEngagementTracker
     Route::prefix('/stakeholderEngagementTracker')->group(function () {
         Route::get('/', [AdminController::class, "stakeholderEngagementTracker"])->middleware('auth')->name('stakeholderEngagementTracker');
+        Route::get('/stakeHolderEngagementTracker_csv', [AdminController::class, 'stakeHolderEngagementTracker_csv'])->middleware('auth')->name('stakeHolderEngagementTracker_csv');
         Route::delete('/{stakeHolderEngagementTracker}', [AdminController::class, "delete_stakeholderEngagementTracker"])->middleware('auth')->name('delete-stakeholderEngagementTracker');
     });
 });

@@ -2,17 +2,17 @@
 
 namespace App\Exports;
 
-use App\Models\stakeHolderEngagementTracker as ModelsStakeHolderEngagementTracker;
+use App\Models\stakeHolderEngagementTracker;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class stakeHolderEngagementTracker implements FromCollection
+class stakeHolderEngagementTrackerCsv implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return ModelsStakeHolderEngagementTracker::get([
+        return stakeHolderEngagementTracker::get([
             'Date_of_interaction',
             'state',
             'Programme_Year_From',

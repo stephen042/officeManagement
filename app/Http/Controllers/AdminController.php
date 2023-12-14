@@ -14,6 +14,7 @@ use App\Models\deliverableTbale;
 use App\Models\deliverable_table;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\stakeHolderEngagementTracker;
+use App\Exports\stakeHolderEngagementTrackerCsv;
 // use Illuminate\Foundation\Auth\User;
 
 class AdminController extends Controller
@@ -501,7 +502,7 @@ class AdminController extends Controller
 
     public function stakeHolderEngagementTracker_csv() {
         $date = Carbon::now()->format('Y-m-d-H-i-a');
-        return Excel::download( new stakeHolderEngagementTracker , 'stakeHolderEngagementTracker-'.$date.'.csv');
+        return Excel::download( new stakeHolderEngagementTrackerCsv , 'stakeHolderEngagementTracker-'.$date.'.csv');
     }
 
     public function stakeholderEngagementTracker(Request $request)
